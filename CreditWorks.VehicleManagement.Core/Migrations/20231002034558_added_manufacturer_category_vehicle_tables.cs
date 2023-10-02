@@ -77,6 +77,38 @@ namespace CreditWorks.VehicleManagement.Core.Migrations
                 name: "IX_Vehicles_ManufacturerId",
                 table: "Vehicles",
                 column: "ManufacturerId");
+
+            //insert pre-defined manufacturers according to the test requirement
+            migrationBuilder.InsertData(
+                table: "Manufacturers",
+                columns: new[] { "Name" },
+                values: new object[,]
+                {
+                    { "Mazda" },
+                    { "Mercedes" },
+                    { "Honda" },
+                    { "Ferrari" },
+                    { "Toyota" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Name", "MinWeight", "MaxWeight", "IconUrl" },
+                values: new object[,]
+                {
+                    { "Light", 0, 499.00, "" },
+                    { "Medium", 500.00, 2499.00, "" },
+                    { "Heavy", 2500.00, float.MaxValue, "" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Vehicles",
+                columns: new[] { "ManufacturerId", "CategoryId", "Owner", "Year", "Weight" },
+                values: new object[,]
+                {
+                    { "2", 3, "Jane Turei", "2015", "2500" },
+                    { "1", 2, "John Smith", "2019", "1000" }
+                });
         }
 
         /// <inheritdoc />

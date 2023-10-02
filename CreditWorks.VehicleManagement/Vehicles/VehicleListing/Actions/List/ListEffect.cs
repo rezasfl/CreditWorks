@@ -1,5 +1,5 @@
-﻿using CreditWorks.VehicleManagement.Core.Data.Models;
-using CreditWorks.VehicleManagement.Data;
+﻿using CreditWorks.VehicleManagement.Data;
+using CreditWorks.VehicleManagement.Data.Models;
 using Fluxor;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Immutable;
@@ -19,9 +19,11 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing.Actions.List
         {
             using var context = await _dbContextFactory.CreateDbContextAsync();
 
-            var vehicles = GenerateVehicles(context.Vehicles.Select(v => v));
-            var manufacturers = GenerateManufacturers(context.Manufacturers.Select(m => m));
-            var categories = GenerateCategories(context.Categories.Select(c => c));
+            var canConnect = context.Database.CanConnect();
+
+            var vehicles = GenerateVehicles(await context.Vehicles.ToListAsync());
+            var manufacturers = GenerateManufacturers(await context.Manufacturers.ToListAsync());
+            var categories = GenerateCategories(await context.Categories.ToListAsync());
 
             dispatcher.Dispatch(new VehicleListSuccessAction(vehicles, manufacturers, categories));
         }

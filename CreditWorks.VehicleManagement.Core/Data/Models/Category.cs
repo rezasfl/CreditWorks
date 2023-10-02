@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CreditWorks.VehicleManagement.Core.Data.Models
+namespace CreditWorks.VehicleManagement.Data.Models
 {
     public class Category
     {

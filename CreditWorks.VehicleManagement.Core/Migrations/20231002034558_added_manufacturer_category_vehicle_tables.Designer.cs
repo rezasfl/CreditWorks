@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CreditWorks.VehicleManagement.Core.Migrations
 {
     [DbContext(typeof(VehiclesDbContext))]
-    [Migration("20231002015702_added_manufacturer_category_vehicle_tables")]
+    [Migration("20231002034558_added_manufacturer_category_vehicle_tables")]
     partial class added_manufacturer_category_vehicle_tables
     {
         /// <inheritdoc />
