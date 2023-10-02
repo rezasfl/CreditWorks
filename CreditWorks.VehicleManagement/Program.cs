@@ -1,8 +1,8 @@
-using CreditWorks.VehicleManagement.Vehicles;
 using CreditWorks.VehicleManagement.Core.Managers;
 using CreditWorks.VehicleManagement.Data;
-using Microsoft.EntityFrameworkCore;
+using CreditWorks.VehicleManagement.Vehicles;
 using Fluxor;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +14,7 @@ builder.Services.AddVehicles();
 
 builder.Services.AddFluxor(o =>
 {
-    o.ScanAssemblies(typeof(VehiclesExtensions).Assembly);
+    o.ScanAssemblies(typeof(Program).Assembly);
 });
 
 //Getting the connection string from appsettings
@@ -22,8 +22,7 @@ builder.Services.AddFluxor(o =>
 var connectionString = builder.Configuration.GetConnectionString("Default") ?? throw new NullReferenceException("No connection string in appsettings.json");
 
 //Registring DbContextFactory so that we can inject this factory to access our DB when needed.
-builder.Services.AddDbContextFactory<VehiclesDbContext>((DbContextOptionsBuilder options) =>
-options.UseSqlServer(connectionString));
+builder.Services.AddDbContextFactory<VehiclesDbContext>(options => options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 

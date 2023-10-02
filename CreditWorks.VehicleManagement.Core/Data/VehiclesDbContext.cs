@@ -10,8 +10,8 @@ namespace CreditWorks.VehicleManagement.Data
 
         }
 
-        public DbSet<Manufacturer> Manufacturers { get; }
-        public DbSet<Category> Categories { get; }
-        public DbSet<Vehicle> Vehicles { get; }
+        public DbSet<Manufacturer> Manufacturers { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
     }
 }

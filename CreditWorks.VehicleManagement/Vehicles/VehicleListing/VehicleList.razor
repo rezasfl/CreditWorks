@@ -2,8 +2,6 @@
 
 @inherits Fluxor.Blazor.Web.Components.FluxorComponent
 
-@using Microsoft.AspNetCore.Components.Web
-
 @if (State != null)
 {
     <div class="container">
@@ -33,9 +31,9 @@
                                 <td class="align-items-center">
                                     <a class="fw-bold h6 mb-0" href="@($"/vehicles/{vehicle.Id}")">@vehicle.Owner</a>
                                 </td>
-                                <td class="align-middle">@State.Value.Manufacturers.Single(m => m.Id == vehicle.Manifacturer) </td>
+                                <td class="align-middle">@State.Value.Manufacturers.Single(m => m.Id == vehicle.Manifacturer).Name </td>
                                 <td class="align-middle">@vehicle.Year </td>
-                                <td class="align-middle">@State.Value.Categories.Single(m => m.Id == vehicle.Category) </td>
+                                <td class="align-middle">@State.Value.Categories.Single(m => m.Id == vehicle.Category).Name (icon) </td>
                             </tr>
                         }
                     </tbody>

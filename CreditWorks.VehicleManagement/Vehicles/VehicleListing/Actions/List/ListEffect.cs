@@ -19,11 +19,12 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing.Actions.List
         {
             using var context = await _dbContextFactory.CreateDbContextAsync();
 
-            var canConnect = context.Database.CanConnect();
+            //used to see if we can connect to the DB
+            //var canConnect = context.Database.CanConnect();
 
-            var vehicles = GenerateVehicles(await context.Vehicles.ToListAsync());
             var manufacturers = GenerateManufacturers(await context.Manufacturers.ToListAsync());
             var categories = GenerateCategories(await context.Categories.ToListAsync());
+            var vehicles = GenerateVehicles(await context.Vehicles.ToListAsync());
 
             dispatcher.Dispatch(new VehicleListSuccessAction(vehicles, manufacturers, categories));
         }

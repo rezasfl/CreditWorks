@@ -1,5 +1,4 @@
-﻿using CreditWorks.VehicleManagement.Vehicles.Models;
-using CreditWorks.VehicleManagement.Vehicles.VehicleListing.Actions;
+﻿using CreditWorks.VehicleManagement.Vehicles.VehicleListing.Actions;
 using Fluxor;
 
 namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing
