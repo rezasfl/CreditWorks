@@ -5,11 +5,27 @@
 namespace CreditWorks.VehicleManagement.Migrations
 {
     /// <inheritdoc />
-    public partial class added_vehicle_and_manufacturer_tables : Migration
+    public partial class added_manufacturer_category_vehicle_tables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MinWeight = table.Column<float>(type: "real", nullable: false),
+                    MaxWeight = table.Column<float>(type: "real", nullable: false),
+                    IconUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Manufacturers",
                 columns: table => new
@@ -30,13 +46,20 @@ namespace CreditWorks.VehicleManagement.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ManufacturerId = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
                     Owner = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Year = table.Column<int>(type: "int", nullable: false),
-                    Weight = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Weight = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Vehicles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Vehicles_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Vehicles_Manufacturers_ManufacturerId",
                         column: x => x.ManufacturerId,
@@ -46,31 +69,14 @@ namespace CreditWorks.VehicleManagement.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Vehicles_CategoryId",
+                table: "Vehicles",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Vehicles_ManufacturerId",
                 table: "Vehicles",
                 column: "ManufacturerId");
-
-            //insert pre-defined manufacturers according to the test requirement
-            migrationBuilder.InsertData(
-                table: "Manufacturers",
-                columns: new[] { "Name" },
-                values: new object[,]
-                {
-                    { "Mazda" },
-                    { "Mercedes" },
-                    { "Honda" },
-                    { "Ferrari" },
-                    { "Toyota" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Vehicles",
-                columns: new[] { "ManufacturerId", "Owner", "Year", "Weight" },
-                values: new object[,]
-                {
-                    { "2", "Jane Turei", "2015", "2500" },
-                    { "1", "John Smith", "2019", "1000" }
-                });
         }
 
         /// <inheritdoc />
@@ -78,6 +84,9 @@ namespace CreditWorks.VehicleManagement.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Vehicles");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Manufacturers");

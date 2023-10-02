@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CreditWorks.VehicleManagement.Migrations
 {
     [DbContext(typeof(VehiclesDbContext))]
-    [Migration("20231002003729_added_vehicle_and_manufacturer_tables")]
-    partial class added_vehicle_and_manufacturer_tables
+    [Migration("20231002012913_added_manufacturer_category_vehicle_tables")]
+    partial class added_manufacturer_category_vehicle_tables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,33 @@ namespace CreditWorks.VehicleManagement.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("CreditWorks.VehicleManagement.Data.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("IconUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("MaxWeight")
+                        .HasColumnType("real");
+
+                    b.Property<float>("MinWeight")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
 
             modelBuilder.Entity("CreditWorks.VehicleManagement.Data.Models.Manufacturer", b =>
                 {
@@ -49,6 +76,9 @@ namespace CreditWorks.VehicleManagement.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ManufacturerId")
                         .HasColumnType("int");
 
@@ -56,13 +86,15 @@ namespace CreditWorks.VehicleManagement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Weight")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("Weight")
+                        .HasColumnType("real");
 
                     b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("ManufacturerId");
 
@@ -71,11 +103,19 @@ namespace CreditWorks.VehicleManagement.Migrations
 
             modelBuilder.Entity("CreditWorks.VehicleManagement.Data.Models.Vehicle", b =>
                 {
+                    b.HasOne("CreditWorks.VehicleManagement.Data.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("CreditWorks.VehicleManagement.Data.Models.Manufacturer", "Manufacturer")
                         .WithMany()
                         .HasForeignKey("ManufacturerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Category");
 
                     b.Navigation("Manufacturer");
                 });

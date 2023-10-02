@@ -21,6 +21,33 @@ namespace CreditWorks.VehicleManagement.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("CreditWorks.VehicleManagement.Data.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("IconUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("MaxWeight")
+                        .HasColumnType("real");
+
+                    b.Property<float>("MinWeight")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("CreditWorks.VehicleManagement.Data.Models.Manufacturer", b =>
                 {
                     b.Property<int>("Id")
@@ -46,6 +73,9 @@ namespace CreditWorks.VehicleManagement.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ManufacturerId")
                         .HasColumnType("int");
 
@@ -53,13 +83,15 @@ namespace CreditWorks.VehicleManagement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Weight")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("Weight")
+                        .HasColumnType("real");
 
                     b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("ManufacturerId");
 
@@ -68,11 +100,19 @@ namespace CreditWorks.VehicleManagement.Migrations
 
             modelBuilder.Entity("CreditWorks.VehicleManagement.Data.Models.Vehicle", b =>
                 {
+                    b.HasOne("CreditWorks.VehicleManagement.Data.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("CreditWorks.VehicleManagement.Data.Models.Manufacturer", "Manufacturer")
                         .WithMany()
                         .HasForeignKey("ManufacturerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Category");
 
                     b.Navigation("Manufacturer");
                 });
