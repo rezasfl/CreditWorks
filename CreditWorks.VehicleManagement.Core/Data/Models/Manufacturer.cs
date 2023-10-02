@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CreditWorks.VehicleManagement.Data.Models
+namespace CreditWorks.VehicleManagement.Core.Data.Models
 {
     public class Manufacturer
     {

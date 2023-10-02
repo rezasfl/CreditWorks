@@ -1,4 +1,4 @@
-﻿using CreditWorks.VehicleManagement.Data.Models;
+﻿using CreditWorks.VehicleManagement.Core.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CreditWorks.VehicleManagement.Data

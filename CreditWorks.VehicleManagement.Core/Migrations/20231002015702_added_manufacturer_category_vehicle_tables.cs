@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace CreditWorks.VehicleManagement.Migrations
+namespace CreditWorks.VehicleManagement.Core.Migrations
 {
     /// <inheritdoc />
     public partial class added_manufacturer_category_vehicle_tables : Migration

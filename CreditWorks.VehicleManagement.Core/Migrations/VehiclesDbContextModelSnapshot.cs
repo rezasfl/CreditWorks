@@ -3,19 +3,16 @@ using CreditWorks.VehicleManagement.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace CreditWorks.VehicleManagement.Migrations
+namespace CreditWorks.VehicleManagement.Core.Migrations
 {
     [DbContext(typeof(VehiclesDbContext))]
-    [Migration("20231002012913_added_manufacturer_category_vehicle_tables")]
-    partial class added_manufacturer_category_vehicle_tables
+    partial class VehiclesDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,7 +21,7 @@ namespace CreditWorks.VehicleManagement.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CreditWorks.VehicleManagement.Data.Models.Category", b =>
+            modelBuilder.Entity("CreditWorks.VehicleManagement.Core.Data.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -51,7 +48,7 @@ namespace CreditWorks.VehicleManagement.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("CreditWorks.VehicleManagement.Data.Models.Manufacturer", b =>
+            modelBuilder.Entity("CreditWorks.VehicleManagement.Core.Data.Models.Manufacturer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -68,7 +65,7 @@ namespace CreditWorks.VehicleManagement.Migrations
                     b.ToTable("Manufacturers");
                 });
 
-            modelBuilder.Entity("CreditWorks.VehicleManagement.Data.Models.Vehicle", b =>
+            modelBuilder.Entity("CreditWorks.VehicleManagement.Core.Data.Models.Vehicle", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -101,15 +98,15 @@ namespace CreditWorks.VehicleManagement.Migrations
                     b.ToTable("Vehicles");
                 });
 
-            modelBuilder.Entity("CreditWorks.VehicleManagement.Data.Models.Vehicle", b =>
+            modelBuilder.Entity("CreditWorks.VehicleManagement.Core.Data.Models.Vehicle", b =>
                 {
-                    b.HasOne("CreditWorks.VehicleManagement.Data.Models.Category", "Category")
+                    b.HasOne("CreditWorks.VehicleManagement.Core.Data.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CreditWorks.VehicleManagement.Data.Models.Manufacturer", "Manufacturer")
+                    b.HasOne("CreditWorks.VehicleManagement.Core.Data.Models.Manufacturer", "Manufacturer")
                         .WithMany()
                         .HasForeignKey("ManufacturerId")
                         .OnDelete(DeleteBehavior.Cascade)
