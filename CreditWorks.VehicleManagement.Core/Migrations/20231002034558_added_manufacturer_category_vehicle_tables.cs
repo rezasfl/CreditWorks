@@ -96,9 +96,9 @@ namespace CreditWorks.VehicleManagement.Core.Migrations
                 columns: new[] { "Name", "MinWeight", "MaxWeight", "IconUrl" },
                 values: new object[,]
                 {
-                    { "Light", 0, 499.00, "" },
-                    { "Medium", 500.00, 2499.00, "" },
-                    { "Heavy", 2500.00, float.MaxValue, "" }
+                    { "Light", 0, 499.00, "fa-solid fa-motorcycle" },
+                    { "Medium", 500.00, 2499.00, "fa-solid fa-car" },
+                    { "Heavy", 2500.00, float.MaxValue, "fa-solid fa-truck" }
                 });
 
             migrationBuilder.InsertData(
@@ -107,7 +107,8 @@ namespace CreditWorks.VehicleManagement.Core.Migrations
                 values: new object[,]
                 {
                     { "2", 3, "Jane Turei", "2015", "2500" },
-                    { "1", 2, "John Smith", "2019", "1000" }
+                    { "1", 2, "John Smith", "2019", "1000" },
+                    { "3", 2, "Andy Smith", "1990", "400" }
                 });
         }
 

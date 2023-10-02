@@ -14,10 +14,10 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing
             _dispatcher = dispatcher;
         }
 
-        internal void List()
+        internal void List(bool sortedByOwner = true, int? selectedManufacturer = null, bool sortedByYear = false, int? category = null)
         {
             _logger.LogInformation($"Dispatching action to load vehicles list");
-            _dispatcher.Dispatch(new ListAction());
+            _dispatcher.Dispatch(new ListAction(sortedByOwner, selectedManufacturer, sortedByYear, category));
         }
     }
 }

@@ -7,13 +7,62 @@
     <div class="container">
         <div class="card rounded-3">
             <div class="overflow-y-hidden table-responsive border-top">
-                <table class="mb-0 table table-borderless text-black-50 text-nowrap">
+                <table class="mb-0 table table-borderless table-hover text-black-50 text-nowrap">
                     <thead class="table-light">
                         <tr>
-                            <th scope="col">Owner's Name</th>
-                            <th scope="col">Manufacturer</th>
-                            <th scope="col">Year</th>
-                            <th scope="col">Category</th>
+                            <th>
+                                <div class="d-flex">
+                                    <p class="m-0">
+                                        Owner
+                                    </p>
+                                    <p class="align-items-center d-flex m-0 ms-2 text-black-50">
+                                        <i class="fa-solid fa-arrow-down-a-z"></i>
+                                        <input class="form-check ms-1" type="checkbox" @bind="SortedByOwner" />
+                                    </p>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="align-items-center d-flex">
+                                    <p class="m-0">
+                                        Manufacturer
+                                    </p>
+                                    <select class="form-select form-select-sm ms-1" @bind="SelectedManufacturer">
+                                        <option value="" selected disabled hidden>All</option>
+                                        @foreach (var manufacturer in State.Value.Manufacturers)
+                                        {
+                                            <option value="@manufacturer.Id">@manufacturer.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="d-flex">
+                                    <p class="m-0"> Year</p>
+                                    <p class="align-items-center d-flex m-0 ms-2 text-black-50">
+                                        <i class="fa-solid fa-arrow-down-1-9"></i>
+                                        <input class="form-check ms-1" type="checkbox" @bind="Year" />
+                                    </p>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="align-items-center d-flex">
+                                    <p class="m-0">
+                                        Category
+                                    </p>
+                                    <select class="form-select form-select-sm ms-1" @bind="Category">
+                                        <option value="" selected disabled hidden>All</option>
+                                        @foreach (var category in State.Value.Categories)
+                                        {
+                                            <option value="@category.Id">@category.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </th>
+                            <th class="text-end">
+                                <button class="btn btn-sm btn-outline-danger" @onclick="ClearFilters" disabled="@(!State.Value.HasFilters)">
+                                    <span><i class="fa-solid fa-filter-circle-xmark"></i></span>
+                                </button>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,13 +76,16 @@
                         }
                         @foreach (var vehicle in State.Value.Vehicles)
                         {
-                            <tr class="border-top" style="cursor:pointer;" @onclick="() => OnVehicleRowClicked(vehicle)">
-                                <td class="align-items-center">
-                                    <a class="fw-bold h6 mb-0" href="@($"/vehicles/{vehicle.Id}")">@vehicle.Owner</a>
+                            <tr class="border-top text-black" style="cursor:pointer;" @onclick="() => OnVehicleRowClicked(vehicle)">
+                                <td>
+                                    <p class="fw-bold h6 mb-0" href="@($"/vehicles/{vehicle.Id}")">@vehicle.Owner</p>
                                 </td>
-                                <td class="align-middle">@State.Value.Manufacturers.Single(m => m.Id == vehicle.Manifacturer).Name </td>
-                                <td class="align-middle">@vehicle.Year </td>
-                                <td class="align-middle">@State.Value.Categories.Single(m => m.Id == vehicle.Category).Name (icon) </td>
+                                <td>@State.Value.Manufacturers.Single(m => m.Id == vehicle.Manifacturer).Name </td>
+                                <td>@vehicle.Year </td>
+                                @{
+                                    var category = State.Value.Categories.Single(m => m.Id == vehicle.Category);
+                                }
+                                <td colspan="2"><span><i class="@category.IconUrl"></i></span> </td>
                             </tr>
                         }
                     </tbody>

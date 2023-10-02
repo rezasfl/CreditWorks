@@ -8,12 +8,21 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing
         public VehicleListState(
             bool isLoading,
             string? errorMessage,
+            bool sortedByOwner,
+            int? manufacturer,
+            bool sortedByYear,
+            int? category,
             IEnumerable<VehicleListItem>? vehicles,
             IEnumerable<Manufacturer>? manufacturers,
             IEnumerable<Category>? categories)
         {
             IsLoading = isLoading;
             ErrorMessage = errorMessage;
+            SortedByOwner = sortedByOwner;
+            Manufacturer = manufacturer;
+            SortedByYear = sortedByYear;
+            Category = category;
+
             Vehicles = vehicles?.ToImmutableList() ?? ImmutableList<VehicleListItem>.Empty;
             Manufacturers = manufacturers?.ToImmutableList() ?? ImmutableList<Manufacturer>.Empty;
             Categories = categories?.ToImmutableList() ?? ImmutableList<Category>.Empty;
@@ -21,6 +30,14 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing
 
         public bool IsLoading { get; }
         public string? ErrorMessage { get; }
+
+        //Listing filters
+        public bool HasFilters => Manufacturer.HasValue || SortedByYear || Category.HasValue;
+        public bool SortedByOwner { get; }
+        public int? Manufacturer { get; }
+        public bool SortedByYear { get; }
+        public int? Category { get; }
+
         public ImmutableList<VehicleListItem> Vehicles { get; }
         public ImmutableList<Manufacturer> Manufacturers { get; }
         public ImmutableList<Category> Categories { get; }

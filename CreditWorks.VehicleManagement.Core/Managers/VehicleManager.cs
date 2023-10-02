@@ -22,7 +22,11 @@ namespace CreditWorks.VehicleManagement.Core.Managers
             await context.Vehicles.AddAsync(vehicle);
         }
 
-        public async Task<Tuple<IEnumerable<Category>, IEnumerable<Manufacturer>, IEnumerable<Vehicle>>> GetInitialData()
+        public async Task<Tuple<IEnumerable<Category>, IEnumerable<Manufacturer>, IEnumerable<Vehicle>>> GetInitialData(
+            bool sortedByOwner,
+            int? manufacturerId,
+            bool sortedByYear,
+            int? category)
         {
             using var context = await _dbContextFactory.CreateDbContextAsync();
 
@@ -32,6 +36,19 @@ namespace CreditWorks.VehicleManagement.Core.Managers
             var categories = await context.Categories.ToListAsync();
             var manufacturers = await context.Manufacturers.ToListAsync();
             var vehicles = await context.Vehicles.ToListAsync();
+
+            //If we want to sort by both owner AND year, we can use OrderBy().ThenBy()
+            //but for now, we sort either by owner or year
+            if (sortedByOwner)
+                vehicles = vehicles.OrderBy(x => x.Owner).ToList();
+            else if (sortedByYear)
+                vehicles = vehicles.OrderBy(x => x.Year).ToList();
+
+            if (manufacturerId.HasValue)
+                vehicles = vehicles.Where(x => x.Manufacturer.Id == manufacturerId).ToList();
+
+            if (category.HasValue)
+                vehicles = vehicles.Where(x => x.Category.Id == category).ToList();
 
             return new Tuple<IEnumerable<Category>, IEnumerable<Manufacturer>, IEnumerable<Vehicle>>(categories, manufacturers, vehicles);
         }

@@ -20,10 +20,14 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing.Actions.List
         {
             try
             {
-                var data = await _manager.GetInitialData();
+                var data = await _manager.GetInitialData(action.SortedByOwner, action.ManufacturerId, action.SortedByYear, action.Category);
 
                 dispatcher.Dispatch(
                     new VehicleListSuccessAction(
+                        action.SortedByOwner,
+                        action.ManufacturerId,
+                        action.SortedByYear,
+                        action.Category,
                         GenerateCategories(data.Item1),
                         GenerateManufacturers(data.Item2),
                         GenerateVehicles(data.Item3)));
