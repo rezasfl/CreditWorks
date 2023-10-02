@@ -39,10 +39,10 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing.Actions.List
             }
         }
 
-        private static ImmutableList<Models.Category> GenerateCategories(IEnumerable<Category> categories)
+        private static ImmutableList<Shared.Models.Category> GenerateCategories(IEnumerable<Category> categories)
         {
             return categories
-                .Select(c => new Models.Category(c.Id, c.Name, c.MinWeight, c.MaxWeight, c.IconUrl))
+                .Select(c => new Shared.Models.Category(c.Id, c.Name, c.MinWeight, c.MaxWeight, c.IconUrl))
                 .ToImmutableList();
         }
 

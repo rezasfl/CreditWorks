@@ -1,4 +1,6 @@
-﻿namespace CreditWorks.VehicleManagement.Vehicles.Models
+﻿using CreditWorks.VehicleManagement.Shared.Models;
+
+namespace CreditWorks.VehicleManagement.Vehicles.Models
 {
     public class Vehicle
     {

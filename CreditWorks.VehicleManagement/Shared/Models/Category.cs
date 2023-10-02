@@ -1,4 +1,4 @@
-﻿namespace CreditWorks.VehicleManagement.Vehicles.Models
+﻿namespace CreditWorks.VehicleManagement.Shared.Models
 {
     public class Category
     {
