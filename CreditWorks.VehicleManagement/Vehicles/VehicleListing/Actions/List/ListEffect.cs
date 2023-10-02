@@ -8,21 +8,31 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing.Actions.List
     public class ListEffect : Effect<ListAction>
     {
         private readonly VehicleManager _manager;
+        private readonly ILogger<ListEffect> _logger;
 
-        public ListEffect(VehicleManager manager)
+        public ListEffect(VehicleManager manager, ILogger<ListEffect> logger)
         {
             _manager = manager;
+            _logger = logger;
         }
 
         public override async Task HandleAsync(ListAction action, IDispatcher dispatcher)
         {
-            var data = await _manager.GetInitialData();
+            try
+            {
+                var data = await _manager.GetInitialData();
 
-            dispatcher.Dispatch(
-                new VehicleListSuccessAction(
-                    GenerateCategories(data.Item1),
-                    GenerateManufacturers(data.Item2),
-                    GenerateVehicles(data.Item3)));
+                dispatcher.Dispatch(
+                    new VehicleListSuccessAction(
+                        GenerateCategories(data.Item1),
+                        GenerateManufacturers(data.Item2),
+                        GenerateVehicles(data.Item3)));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error loading vehicle list, reason: {ex.Message}");
+                dispatcher.Dispatch(new VehicleListFailureAction(ex.Message));
+            }
         }
 
         private static ImmutableList<Models.Category> GenerateCategories(IEnumerable<Category> categories)
