@@ -68,8 +68,8 @@ namespace CreditWorks.VehicleManagement.Migrations
                 columns: new[] { "ManufacturerId", "Owner", "Year", "Weight" },
                 values: new object[,]
                 {
-                    { "1", "John Smith", "2019", "1000" },
-                    { "2", "Jane Turei", "2015", "2500" }
+                    { "2", "Jane Turei", "2015", "2500" },
+                    { "1", "John Smith", "2019", "1000" }
                 });
         }
 
