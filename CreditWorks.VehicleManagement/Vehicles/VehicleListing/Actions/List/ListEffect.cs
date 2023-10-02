@@ -1,32 +1,28 @@
-﻿using CreditWorks.VehicleManagement.Data;
+﻿using CreditWorks.VehicleManagement.Core.Managers;
 using CreditWorks.VehicleManagement.Data.Models;
 using Fluxor;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Immutable;
 
 namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing.Actions.List
 {
     public class ListEffect : Effect<ListAction>
     {
-        private readonly IDbContextFactory<VehiclesDbContext> _dbContextFactory;
+        private readonly VehicleManager _manager;
 
-        public ListEffect(IDbContextFactory<VehiclesDbContext> dbContextFactory)
+        public ListEffect(VehicleManager manager)
         {
-            _dbContextFactory = dbContextFactory;
+            _manager = manager;
         }
 
         public override async Task HandleAsync(ListAction action, IDispatcher dispatcher)
         {
-            using var context = await _dbContextFactory.CreateDbContextAsync();
+            var data = await _manager.GetInitialData();
 
-            //used to see if we can connect to the DB
-            //var canConnect = context.Database.CanConnect();
-
-            var manufacturers = GenerateManufacturers(await context.Manufacturers.ToListAsync());
-            var categories = GenerateCategories(await context.Categories.ToListAsync());
-            var vehicles = GenerateVehicles(await context.Vehicles.ToListAsync());
-
-            dispatcher.Dispatch(new VehicleListSuccessAction(vehicles, manufacturers, categories));
+            dispatcher.Dispatch(
+                new VehicleListSuccessAction(
+                    GenerateCategories(data.Item1),
+                    GenerateManufacturers(data.Item2),
+                    GenerateVehicles(data.Item3)));
         }
 
         private static ImmutableList<Models.Category> GenerateCategories(IEnumerable<Category> categories)

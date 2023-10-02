@@ -6,17 +6,18 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing.Actions
     public class VehicleListSuccessAction
     {
         public VehicleListSuccessAction(
-            ImmutableList<VehicleListItem> vehicles,
+            ImmutableList<Category> categories,
             ImmutableList<Manufacturer> manufacturers,
-            ImmutableList<Category> categories)
+            ImmutableList<VehicleListItem> vehicles
+            )
         {
             Vehicles = vehicles;
             Manufacturers = manufacturers;
             Categories = categories;
         }
 
-        public ImmutableList<VehicleListItem> Vehicles { get; }
-        public ImmutableList<Manufacturer> Manufacturers { get; }
         public ImmutableList<Category> Categories { get; }
+        public ImmutableList<Manufacturer> Manufacturers { get; }
+        public ImmutableList<VehicleListItem> Vehicles { get; }
     }
 }
