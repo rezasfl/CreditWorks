@@ -12,8 +12,6 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
         [Inject] public IState<CategoriesState>? State { get; set; }
         [Inject] public CategoriesFacade? Facade { get; set; }
 
-
-
         protected override void OnParametersSet()
         {
             if (Category != null)
@@ -21,12 +19,11 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
                 _name = Category.Name;
                 _minWeight = Category.MinWeight;
                 _maxWeight = Category.MaxWeight;
-                _icon = Category.IconUrl;
+                _icon = Category.Icon;
             }
 
             base.OnParametersSet();
         }
-
 
         private string? _name;
         public string? Name
@@ -39,9 +36,8 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
             }
         }
 
-
-        private float _minWeight;
-        public float MinWeight
+        private float? _minWeight;
+        public float? MinWeight
         {
             get => _minWeight;
             set
@@ -51,9 +47,8 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
             }
         }
 
-
-        private float _maxWeight;
-        public float MaxWeight
+        private float? _maxWeight;
+        public float? MaxWeight
         {
             get => _maxWeight;
             set
@@ -63,7 +58,6 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
             }
         }
 
-
         private string? _icon;
         public string? Icon
         {
@@ -71,18 +65,13 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
             set
             {
                 if (_icon != value)
-                    Facade?.SetCategoryIcon(Category, value);
+                    Facade?.SetCategoryIcon(Category!, value);
             }
         }
 
-        private void CloseCateory()
+        private void ResetIcon()
         {
-
-        }
-
-        private void Close()
-        {
-
+            Facade?.SetCategoryIcon(Category!, null);
         }
     }
 }

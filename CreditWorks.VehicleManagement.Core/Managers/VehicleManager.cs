@@ -59,5 +59,37 @@ namespace CreditWorks.VehicleManagement.Core.Managers
 
             return new Tuple<IEnumerable<Category>, IEnumerable<Manufacturer>, IEnumerable<Vehicle>>(categories, manufacturers, vehicles);
         }
+
+        public async Task<IEnumerable<Category>> UpsertCategories(IEnumerable<Category> categories)
+        {
+            using var context = await _dbContextFactory.CreateDbContextAsync();
+
+            foreach (var category in categories)
+            {
+                var dbCategory = await context.Categories.SingleOrDefaultAsync(c => c.Id == category.Id);
+                if (dbCategory != null)
+                {
+                    if (dbCategory.Name != category.Name)
+                        dbCategory.Name = category.Name;
+
+                    if (dbCategory.MinWeight != category.MinWeight)
+                        dbCategory.MinWeight = category.MinWeight;
+
+                    if (dbCategory.MaxWeight != category.MaxWeight)
+                        dbCategory.MaxWeight = category.MaxWeight;
+
+                    if (dbCategory.IconUrl != category.IconUrl)
+                        dbCategory.IconUrl = category.IconUrl;
+
+                    context.Categories.Update(dbCategory);
+                }
+                else
+                    await context.Categories.AddAsync(category);
+            }
+
+            await context.SaveChangesAsync();
+
+            return await context.Categories.ToListAsync();
+        }
     }
 }

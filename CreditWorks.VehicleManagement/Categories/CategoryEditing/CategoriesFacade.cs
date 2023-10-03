@@ -1,4 +1,6 @@
-﻿using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions.List;
+﻿using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions;
+using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions.List;
+using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions.Update;
 using CreditWorks.VehicleManagement.Shared.Models;
 using Fluxor;
 
@@ -8,11 +10,13 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing
     {
         private readonly ILogger<CategoriesFacade> _logger;
         private readonly IDispatcher _dispatcher;
+        private readonly IState<CategoriesState> _state;
 
-        public CategoriesFacade(ILogger<CategoriesFacade> logger, IDispatcher dispatcher)
+        public CategoriesFacade(ILogger<CategoriesFacade> logger, IDispatcher dispatcher, IState<CategoriesState> state)
         {
             _logger = logger;
             _dispatcher = dispatcher;
+            _state = state;
         }
 
         internal void List()
@@ -23,32 +27,104 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing
 
         internal void Save()
         {
-
+            _logger.LogInformation($"Dispatching action to update category");
+            _dispatcher.Dispatch(new UpdateAction());
         }
 
         internal void CancelChanges()
         {
-
+            _logger.LogInformation($"Dispatching action to update category");
+            _dispatcher.Dispatch(new CancelChangesAction());
         }
 
-        internal void SetCategoryIcon(Category? category, string? value)
+        internal void AddCategory()
         {
-            throw new NotImplementedException();
+            if (_state.Value.UnderEdit != null)
+            {
+                _logger.LogInformation($"Adding a new category");
+
+                var categories = _state.Value.UnderEdit.AddCategory();
+
+                _dispatcher.Dispatch(new CategoriesSuccessAction(categories));
+            }
+            else
+            {
+                var errorMessage = $"No category under edit";
+                _logger.LogError($"Error setting category icon, reason: {errorMessage}");
+                _dispatcher.Dispatch(new CategoriesFailureAction(errorMessage));
+            }
         }
 
-        internal void SetCategoryMaxWeight(Category? category, float value)
+        internal void SetCategoryMaxWeight(Category? category, float? maxWeight)
         {
-            throw new NotImplementedException();
+            if (_state.Value.UnderEdit != null)
+            {
+                _logger.LogInformation($"Setting category max weight");
+
+                var categories = _state.Value.UnderEdit.SetCategoryMaxWeight(category, maxWeight);
+
+                _dispatcher.Dispatch(new CategoriesSuccessAction(categories));
+            }
+            else
+            {
+                var errorMessage = $"No category under edit";
+                _logger.LogError($"Error setting category max weight, reason: {errorMessage}");
+                _dispatcher.Dispatch(new CategoriesFailureAction(errorMessage));
+            }
         }
 
-        internal void SetCategoryMinWeight(Category? category, float value)
+        internal void SetCategoryMinWeight(Category? category, float? minWeight)
         {
-            throw new NotImplementedException();
+            if (_state.Value.UnderEdit != null)
+            {
+                _logger.LogInformation($"Setting category minimum weight");
+
+                var categories = _state.Value.UnderEdit.SetCategoryMinWeight(category, minWeight);
+
+                _dispatcher.Dispatch(new CategoriesSuccessAction(categories));
+            }
+            else
+            {
+                var errorMessage = $"No category under edit";
+                _logger.LogError($"Error setting category minimum weight, reason: {errorMessage}");
+                _dispatcher.Dispatch(new CategoriesFailureAction(errorMessage));
+            }
         }
 
-        internal void SetCategoryName(Category? category, string? value)
+        internal void SetCategoryName(Category? category, string? name)
         {
-            throw new NotImplementedException();
+            if (_state.Value.UnderEdit != null)
+            {
+                _logger.LogInformation($"Setting category name");
+
+                var categories = _state.Value.UnderEdit.SetCategoryName(category, name);
+
+                _dispatcher.Dispatch(new CategoriesSuccessAction(categories));
+            }
+            else
+            {
+                var errorMessage = $"No category under edit";
+                _logger.LogError($"Error setting category name, reason: {errorMessage}");
+                _dispatcher.Dispatch(new CategoriesFailureAction(errorMessage));
+            }
+        }
+
+        internal void SetCategoryIcon(Category category, string? icon)
+        {
+            if (_state.Value.UnderEdit != null)
+            {
+                _logger.LogInformation($"Setting category icon");
+
+                var categories = _state.Value.UnderEdit.SetIcon(category, icon);
+
+                _dispatcher.Dispatch(new CategoriesSuccessAction(categories));
+            }
+            else
+            {
+                var errorMessage = $"No category under edit";
+                _logger.LogError($"Error setting category icon, reason: {errorMessage}");
+                _dispatcher.Dispatch(new CategoriesFailureAction(errorMessage));
+            }
         }
     }
 }

@@ -24,7 +24,7 @@ namespace CreditWorks.Categories.CategoryEditing.VehicleListing.Actions.List
             {
                 var categories = await _manager.GetCategories();
 
-                dispatcher.Dispatch(new CategoriesSuccessAction(GenerateCategories(categories)));
+                dispatcher.Dispatch(new ListSuccessAction(GenerateCategories(categories)));
             }
             catch (Exception ex)
             {
@@ -41,7 +41,7 @@ namespace CreditWorks.Categories.CategoryEditing.VehicleListing.Actions.List
                 .Select(c => new Category(c.Id, c.Name, c.MinWeight, c.MaxWeight, c.IconUrl))
                 .ToImmutableList();
 
-            return new CategoriesList(convertedCategories, false);
+            return new CategoriesList(convertedCategories);
         }
     }
 }

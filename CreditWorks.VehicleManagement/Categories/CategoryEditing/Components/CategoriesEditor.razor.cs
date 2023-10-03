@@ -30,6 +30,17 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
 
         private void StateChanged(object? sender, EventArgs e)
         {
+            if (State != null)
+            {
+                if (!State.Value.UnderEdit?.Categories.Any(c => c.Id == _selectedCategoryId) ?? true)
+                    _selectedCategoryId = null;
+                if (!_selectedCategoryId.HasValue)
+                    _selectedCategoryId = 
+                        State.Value.UnderEdit?.Categories.FirstOrDefault(c => c.Id == 0)?.Id ??
+                        State.Value.UnderEdit?.Categories.FirstOrDefault()?.Id;
+                _selectedCategory = State.Value.UnderEdit?.Categories.FirstOrDefault(c => c.Id == _selectedCategoryId);
+            }
+
             StateHasChanged();
         }
 
@@ -52,7 +63,12 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
 
         private void AddCategory()
         {
+            Facade?.AddCategory();
+        }
 
+        private void SaveCategories()
+        {
+            Facade?.Save();
         }
     }
 }

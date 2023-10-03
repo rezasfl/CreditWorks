@@ -44,6 +44,17 @@
                         </div>
                     </div>
                 }
+                <div class="m-3">
+                    <button class="btn btn-sm btn-success me-4 @(State.Value.CanSave ? "" : "disabled")" @onclick="SaveCategories" disabled="@(!State.Value.CanSave)">Save</button>
+                    @if (State.Value.IsNew)
+                    {
+                        <button @onclick="Facade.CancelChanges" class="btn btn-sm btn-secondary @(State.Value.CanSave ? "btn-primary" : "btn-primary")">Cancel</button>
+                    }
+                    else if (State.Value.HasEdits)
+                    {
+                        <button @onclick="Facade.CancelChanges" class="btn btn-sm @(State.Value.CanSave ? "btn-primary" : "btn-primary")">Cancel changes</button>
+                    }
+                </div>
             </div>
         </div>
     </div>
