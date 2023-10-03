@@ -1,4 +1,5 @@
 ﻿using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions;
+using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions.Delete;
 using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions.List;
 using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions.Update;
 using CreditWorks.VehicleManagement.Shared.Models;
@@ -35,6 +36,12 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing
         {
             _logger.LogInformation($"Dispatching action to update category");
             _dispatcher.Dispatch(new CancelChangesAction());
+        }
+
+        internal void DeleteCategory(int id)
+        {
+            _logger.LogInformation($"Dispatching action to update category");
+            _dispatcher.Dispatch(new DeleteAction(id));
         }
 
         internal void AddCategory()

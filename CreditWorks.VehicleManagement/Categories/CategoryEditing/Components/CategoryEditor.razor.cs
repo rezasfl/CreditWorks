@@ -73,5 +73,10 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
         {
             Facade?.SetCategoryIcon(Category!, null);
         }
+
+        private void DeleteCategory()
+        {
+            Facade?.DeleteCategory(Category!.Id);
+        }
     }
 }

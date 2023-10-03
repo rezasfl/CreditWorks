@@ -91,5 +91,19 @@ namespace CreditWorks.VehicleManagement.Core.Managers
 
             return await context.Categories.ToListAsync();
         }
+
+        public async Task<IEnumerable<Category>> DeleteCategory(int id)
+        {
+            using var context = await _dbContextFactory.CreateDbContextAsync();
+
+            var dbCategory = await context.Categories.SingleOrDefaultAsync(c => c.Id == id);
+
+            if (dbCategory != null)
+                context.Remove(dbCategory);
+
+            await context.SaveChangesAsync();
+
+            return await context.Categories.ToListAsync();
+        }
     }
 }

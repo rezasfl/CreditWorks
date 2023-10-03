@@ -12,25 +12,25 @@
             </div>
             <div class="col-12 col-md-6 mt-2">
                 <p> Icon <span class="text-black-50" @onclick="ResetIcon">reset</span></p>
-                
+
                 @if (!string.IsNullOrWhiteSpace(Icon))
                 {
                     <span><i class="@Icon"></i></span>
                 }
                 else
                 {
-                <select class="form-select form-select-sm ms-1 font-awesome-select" @bind="Icon">
-                    <option value="" selected disabled hidden>Select an icon</option>
-                    <optgroup label="Light">
-                        <option value="fa-solid fa-motorcycle"> <p>&#xf21c;</p></option>
-                    </optgroup>
-                    <optgroup label="Medium">
-                        <option value="fa-solid fa-car-side"><p>&#xf1b9;</p></option>
-                    </optgroup>
-                    <optgroup label="Heavy">
-                        <option value="fa-solid fa-truck"><p>&#xf0d1;</p></option>
-                    </optgroup>
-                </select>
+                    <select class="form-select form-select-sm ms-1 font-awesome-select" @bind="Icon">
+                        <option value="" selected disabled hidden>Select an icon</option>
+                        <optgroup label="Light">
+                            <option value="fa-solid fa-motorcycle"> <p>&#xf21c;</p></option>
+                        </optgroup>
+                        <optgroup label="Medium">
+                            <option value="fa-solid fa-car-side"><p>&#xf1b9;</p></option>
+                        </optgroup>
+                        <optgroup label="Heavy">
+                            <option value="fa-solid fa-truck"><p>&#xf0d1;</p></option>
+                        </optgroup>
+                    </select>
                 }
             </div>
             <div class="col-12 col-md-6 mt-2">
@@ -41,6 +41,13 @@
                 <p> Max weight </p>
                 <input @bind="MaxWeight" class="form-control form-control-sm" />
             </div>
+        </div>
+
+        <div class="m-3">
+            @if (!State.Value.IsNew)
+            {
+                <button @onclick="DeleteCategory" class="btn btn-sm btn-outline-danger">Delete</button>
+            }
         </div>
     </div>
 }
