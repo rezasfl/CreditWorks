@@ -76,3 +76,7 @@ table th div select {
 td, th {
     vertical-align: middle !important;
 }
+
+p{
+    margin: 0;
+}
