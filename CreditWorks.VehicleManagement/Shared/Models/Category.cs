@@ -16,5 +16,19 @@
         public float MinWeight { get; }
         public float MaxWeight { get; }
         public string IconUrl { get; }
+
+        public bool CanSave => ModelIsValid();
+
+        private bool ModelIsValid()
+        {
+            if (string.IsNullOrWhiteSpace(Name))
+                return false;
+            if (MinWeight > MaxWeight)
+                return false;
+            if (string.IsNullOrWhiteSpace(IconUrl))
+                return false;
+
+            return true;
+        }
     }
 }

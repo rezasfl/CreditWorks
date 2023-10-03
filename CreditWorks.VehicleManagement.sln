@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditWorks.VehicleManagement", "CreditWorks.VehicleManagement\CreditWorks.VehicleManagement.csproj", "{AC857AFA-F232-457E-B2B4-90B98B1BDDE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditWorks.VehicleManagement.Core", "CreditWorks.VehicleManagement.Core\CreditWorks.VehicleManagement.Core.csproj", "{FF44E4BA-10C8-4BF1-B28A-C9D50794C657}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditWorks.VehicleManagement.Core", "CreditWorks.VehicleManagement.Core\CreditWorks.VehicleManagement.Core.csproj", "{FF44E4BA-10C8-4BF1-B28A-C9D50794C657}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

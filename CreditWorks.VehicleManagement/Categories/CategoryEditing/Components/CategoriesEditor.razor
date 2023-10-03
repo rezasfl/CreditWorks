@@ -1,0 +1,46 @@
+﻿@page "/categories"
+
+@if (State != null && State.Value.UnderEdit != null)
+{
+    <div class="container">
+        <div class="card rounded-3">
+            <div class="card-header">
+                <div class="d-flex justify-content-between">
+                    <p class="align-self-center fw-bold m-0">Categories</p>
+                    <button class="btn btn-success" @onclick="AddCategory" title="Add a new Category">Add category</button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                @if (!State.Value.UnderEdit.Categories.Any())
+                {
+                    <p class="h6 m-0 p-3 text-center">There are no categories 😅</p>
+                }
+                else
+                {
+                    <div class="row g-0">
+                        <div class="border-0 border-end col-12 col-md-3 col-sm-4 d-flex flex-column justify-content-between p-0">
+                            <div>
+                                <select @bind="SelectedCategoryId" class="bg-white border-0 form-control h-100 overflow-auto p-1 ps-1 w-100" size="@(Math.Max(2, (State.Value.UnderEdit?.Categories.Count) ?? 0))">
+                                    @{
+                                        var categories = State.Value.UnderEdit.Categories;
+
+                                        @foreach (var category in categories)
+                                        {
+                                            <option class="p-2 rounded-start text-truncate" value="@category.Id">@category.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-9 col-sm-8">
+                            @if (_selectedCategory != null)
+                            {
+                                <CategoryEditor Category="_selectedCategory" />
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
