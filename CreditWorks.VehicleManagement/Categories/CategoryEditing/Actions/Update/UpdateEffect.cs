@@ -1,5 +1,6 @@
 ﻿using CreditWorks.VehicleManagement.Categories.CategoryEditing;
 using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions;
+using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions.List;
 using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions.Update;
 using CreditWorks.VehicleManagement.Core.Managers;
 using CreditWorks.VehicleManagement.Shared.Models;
@@ -33,7 +34,7 @@ namespace CreditWorks.Categories.CategoryEditing.VehicleListing.Actions.Update
                     //rollback the entire transaction to ensure consistency
                     var result = await _manager.UpsertCategories(categories);
 
-                    dispatcher.Dispatch(new CategoriesSuccessAction(GenerateCategoryList(result)));
+                    dispatcher.Dispatch(new ListSuccessAction(GenerateCategoryList(result)));
                 }
             }
             catch (Exception ex)
