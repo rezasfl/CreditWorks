@@ -8,7 +8,7 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing
 
         protected override VehicleListState GetInitialState()
         {
-            return new(false, null, false, null, false, null, null, null, null);
+            return new(false, false, null, false, null, null, null, null);
         }
     }
 }

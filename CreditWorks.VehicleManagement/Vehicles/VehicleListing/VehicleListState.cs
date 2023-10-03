@@ -8,7 +8,6 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing
     {
         public VehicleListState(
             bool isLoading,
-            string? errorMessage,
             bool sortedByOwner,
             int? manufacturer,
             bool sortedByYear,
@@ -18,7 +17,6 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing
             IEnumerable<Category>? categories)
         {
             IsLoading = isLoading;
-            ErrorMessage = errorMessage;
             SortedByOwner = sortedByOwner;
             Manufacturer = manufacturer;
             SortedByYear = sortedByYear;
@@ -30,7 +28,6 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing
         }
 
         public bool IsLoading { get; }
-        public string? ErrorMessage { get; }
 
         //Listing filters
         public bool HasFilters => Manufacturer.HasValue || SortedByYear || Category.HasValue;

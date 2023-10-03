@@ -98,7 +98,7 @@ namespace CreditWorks.VehicleManagement.Core.Migrations
                 {
                     { "Light", 0, 499.00, "fa-solid fa-motorcycle" },
                     { "Medium", 500.00, 2499.00, "fa-solid fa-car" },
-                    { "Heavy", 2500.00, float.MaxValue, "fa-solid fa-truck" }
+                    { "Heavy", 2500.00, 10000.00, "fa-solid fa-truck" }
                 });
 
             migrationBuilder.InsertData(
