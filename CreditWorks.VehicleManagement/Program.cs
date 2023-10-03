@@ -4,12 +4,14 @@ using CreditWorks.VehicleManagement.Vehicles;
 using CreditWorks.VehicleManagement.Categories;
 using Fluxor;
 using Microsoft.EntityFrameworkCore;
+using MatBlazor;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddMatBlazor();
 builder.Services.AddSingleton<VehicleManager>();
 builder.Services.AddVehicles();
 builder.Services.AddCategories();

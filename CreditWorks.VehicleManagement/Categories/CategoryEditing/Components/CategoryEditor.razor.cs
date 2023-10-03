@@ -20,10 +20,16 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
                 _minWeight = Category.MinWeight;
                 _maxWeight = Category.MaxWeight;
                 _icon = Category.Icon;
+
+                _maxWeightMin = _minWeight + 1;
+                _minWeightMax = _maxWeight - 1;
             }
 
             base.OnParametersSet();
         }
+
+        private float? _maxWeightMin;
+        private float? _minWeightMax;
 
         private string? _name;
         public string? Name
@@ -42,6 +48,9 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
             get => _minWeight;
             set
             {
+                if (value > _maxWeight)
+                    return;
+
                 if (_minWeight != value)
                     Facade?.SetCategoryMinWeight(Category, value);
             }
@@ -53,6 +62,9 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
             get => _maxWeight;
             set
             {
+                if (_minWeight > value)
+                    return;
+
                 if (_maxWeight != value)
                     Facade?.SetCategoryMaxWeight(Category, value);
             }
