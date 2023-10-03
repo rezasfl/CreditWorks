@@ -1,3 +1,42 @@
 ﻿@using Fluxor.Blazor.Web.Components;
 
 @inherits FluxorComponent
+
+@if (State != null && State.Value.UnderEdit != null && Facade != null)
+{
+    <div class="container">
+        <div class="px-3 row">
+            <div class="col-12 col-md-6 mt-2">
+                <p> Name </p>
+                <input @bind="Name" class="form-control form-control-sm" placeholder="Enter name" />
+            </div>
+            <div class="col-12 col-md-6 mt-2">
+                <p> Icon </p>
+                <input />
+            </div>
+            <div class="col-12 col-md-6 mt-2">
+                <p> Min weight </p>
+                <input @bind="MinWeight" class="form-control form-control-sm" />
+            </div>
+            <div class="col-12 col-md-6 mt-2">
+                <p> Max weight </p>
+                <input @bind="MaxWeight" class="form-control form-control-sm" />
+            </div>
+        </div>
+        <div class="m-3">
+            <button class="btn btn-sm btn-success me-4 @(State.Value.CanSave ? "" : "disabled")" @onclick="Facade.Save" disabled="@(!State.Value.CanSave)">Save</button>
+            @if (State.Value.IsNew)
+            {
+                <button @onclick="CloseCateory" class="btn btn-sm btn-secondary @(State.Value.CanSave ? "btn-primary" : "btn-primary")">Cancel</button>
+            }
+            else if (State.Value.HasEdits)
+            {
+                <button @onclick="Facade.CancelChanges" class="btn btn-sm @(State.Value.CanSave ? "btn-primary" : "btn-primary")">Cancel changes</button>
+            }
+            else
+            {
+                <button @onclick="Close" class="btn btn-primary btn-sm">Close</button>
+            }
+        </div>
+    </div>
+}

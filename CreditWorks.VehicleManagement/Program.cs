@@ -1,6 +1,7 @@
 using CreditWorks.VehicleManagement.Core.Managers;
 using CreditWorks.VehicleManagement.Data;
 using CreditWorks.VehicleManagement.Vehicles;
+using CreditWorks.VehicleManagement.Categories;
 using Fluxor;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<VehicleManager>();
 builder.Services.AddVehicles();
+builder.Services.AddCategories();
 
 builder.Services.AddFluxor(o =>
 {

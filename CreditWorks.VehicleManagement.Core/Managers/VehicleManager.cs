@@ -13,6 +13,13 @@ namespace CreditWorks.VehicleManagement.Core.Managers
             _dbContextFactory = dbContextFactory;
         }
 
+        public async Task<IEnumerable<Category>> GetCategories()
+        {
+            using var context = await _dbContextFactory.CreateDbContextAsync();
+
+            return await context.Categories.ToListAsync();
+        }
+
         public async Task AddVehicle(Vehicle vehicle)
         {
             using var context = await _dbContextFactory.CreateDbContextAsync();

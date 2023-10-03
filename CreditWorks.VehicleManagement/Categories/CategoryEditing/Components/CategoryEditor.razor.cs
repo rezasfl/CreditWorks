@@ -12,14 +12,77 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
         [Inject] public IState<CategoriesState>? State { get; set; }
         [Inject] public CategoriesFacade? Facade { get; set; }
 
+
+
         protected override void OnParametersSet()
         {
-            //name
-            //min weight
-            //maxweight
-            //icon
+            if (Category != null)
+            {
+                _name = Category.Name;
+                _minWeight = Category.MinWeight;
+                _maxWeight = Category.MaxWeight;
+                _icon = Category.IconUrl;
+            }
 
             base.OnParametersSet();
+        }
+
+
+        private string? _name;
+        public string? Name
+        {
+            get => _name;
+            set
+            {
+                if (_name != value)
+                    Facade?.SetCategoryName(Category, value);
+            }
+        }
+
+
+        private float _minWeight;
+        public float MinWeight
+        {
+            get => _minWeight;
+            set
+            {
+                if (_minWeight != value)
+                    Facade?.SetCategoryMinWeight(Category, value);
+            }
+        }
+
+
+        private float _maxWeight;
+        public float MaxWeight
+        {
+            get => _maxWeight;
+            set
+            {
+                if (_maxWeight != value)
+                    Facade?.SetCategoryMaxWeight(Category, value);
+            }
+        }
+
+
+        private string? _icon;
+        public string? Icon
+        {
+            get => _icon;
+            set
+            {
+                if (_icon != value)
+                    Facade?.SetCategoryIcon(Category, value);
+            }
+        }
+
+        private void CloseCateory()
+        {
+
+        }
+
+        private void Close()
+        {
+
         }
     }
 }
