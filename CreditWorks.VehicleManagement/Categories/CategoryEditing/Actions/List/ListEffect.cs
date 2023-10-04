@@ -24,7 +24,7 @@ namespace CreditWorks.Categories.CategoryEditing.VehicleListing.Actions.List
             {
                 var categories = await _manager.GetCategories();
 
-                dispatcher.Dispatch(new ListSuccessAction(GenerateCategories(categories)));
+                dispatcher.Dispatch(new ListSuccessAction(GenerateCategories(categories.OrderBy(c => c.MinWeight))));
             }
             catch (Exception ex)
             {
