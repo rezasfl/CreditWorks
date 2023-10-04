@@ -119,3 +119,7 @@ p {
         transform: rotate(360deg)
     }
 }
+
+.bg-danger-25 {
+    background-color: rgba(220, 53, 69, 0.25) !important;
+}

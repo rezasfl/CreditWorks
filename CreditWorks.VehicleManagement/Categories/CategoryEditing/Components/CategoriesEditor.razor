@@ -4,14 +4,14 @@
 
 @inherits FluxorComponent
 
-@if (State != null && State.Value.UnderEdit != null)
+@if (State != null && State.Value.UnderEdit != null && _validation != null)
 {
     <div class="container">
         <div class="card rounded-3">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <p class="align-self-center fw-bold m-0">Categories</p>
-                    <button class="btn btn-success btn-sm" @onclick="AddCategory" title="Add a new Category">Add category</button>
+                    <button class="btn btn-success btn-sm" disabled="@_validation.CategoryValidations.Any(c => c.HasErrors)" @onclick="AddCategory" title="Add a new Category">Add category</button>
                 </div>
             </div>
             <div class="card-body p-0">
@@ -24,13 +24,14 @@
                     <div class="row g-0">
                         <div class="border-0 border-end col-12 col-md-3 col-sm-4 d-flex flex-column justify-content-between p-0">
                             <div>
-                                <select @bind="SelectedCategoryId" class="bg-white border-0 form-control h-100 overflow-auto p-1 ps-1 w-100" size="@(Math.Max(2, (State.Value.UnderEdit?.Categories.Count) ?? 0))"> 
+                                <select @bind="SelectedCategoryId" class="bg-white border-0 form-control h-100 overflow-auto p-1 ps-1 w-100" size="@(Math.Max(2, (State.Value.UnderEdit?.Categories.Count) ?? 0))">
                                     @{
                                         var categories = State.Value.UnderEdit.Categories;
 
                                         foreach (var category in categories)
                                         {
-                                            <option class="p-2 rounded-start text-truncate" value="@category.Id">@category.Name</option>
+                                            var validation = _validation?.Errors.FirstOrDefault(v => v.category == category);
+                                            <option class="p-2 rounded-start text-truncate @GenerateBgColor(validation?.error)" title="@validation?.error" value="@category.Id">@category.Name</option>
                                         }
                                     }
                                 </select>

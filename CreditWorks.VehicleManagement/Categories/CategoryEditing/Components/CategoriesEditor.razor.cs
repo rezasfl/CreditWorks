@@ -48,6 +48,9 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
                 }
 
                 StateHasChanged();
+
+                _validation = State.Value.CategoriesListValidation;
+
                 if (!State.Value.UnderEdit?.Categories.Any(c => c.Id == _selectedCategoryId) ?? true)
                     _selectedCategoryId = null;
                 if (!_selectedCategoryId.HasValue)
@@ -59,6 +62,8 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
 
             StateHasChanged();
         }
+
+        private CategoriesListValidation? _validation;
 
         private Category? _selectedCategory;
         private int? _selectedCategoryId;
@@ -73,6 +78,14 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
                     _selectedCategory = State?.Value.UnderEdit?.Categories.SingleOrDefault(c => c.Id == value);
                 }
             }
+        }
+
+        private string GenerateBgColor(string? error)
+        {
+            if (!string.IsNullOrWhiteSpace(error))
+                return "bg-danger-25";
+
+            return "";
         }
 
         private void AddCategory()

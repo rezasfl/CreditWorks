@@ -31,7 +31,7 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing
             foreach (var category in categories)
             {
                 foreach (var overlap in categories.Where(otherCategory => category != otherCategory && category.MinWeight < otherCategory.MaxWeight && category.MaxWeight > otherCategory.MinWeight))
-                    exceptions.Add((category, $"This category overlaps with another category {overlap.Name}"));
+                    exceptions.Add((category, $"This category's weight overlaps with {overlap.Name} category"));
             }
             return exceptions;
         }
