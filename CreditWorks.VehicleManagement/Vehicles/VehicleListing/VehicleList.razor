@@ -5,6 +5,16 @@
 @if (State != null)
 {
     <div class="container">
+        <div class="border-bottom pb-4 mb-4 d-flex align-items-center justify-content-between">
+            <div>
+                <p class="fw-bold h3 m-0">Vehicles</p>
+                <div aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page">Vehicles</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
         <div class="card rounded-3">
             <div class="overflow-y-hidden table-responsive border-top">
                 <table class="mb-0 table table-borderless table-hover text-black-50 text-nowrap">
@@ -85,7 +95,7 @@
                                 @{
                                     var category = State.Value.Categories.Single(m => m.Id == vehicle.Category);
                                 }
-                                <td colspan="2"><span><i class="@category.IconUrl"></i></span> </td>
+                                <td colspan="2"><span><i class="@category.Icon"></i></span> </td>
                             </tr>
                         }
                     </tbody>
