@@ -5,6 +5,7 @@ using CreditWorks.VehicleManagement.Categories;
 using Fluxor;
 using Microsoft.EntityFrameworkCore;
 using MatBlazor;
+using Blazored.Modal;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,9 @@ builder.Services.AddMatBlazor();
 builder.Services.AddSingleton<VehicleManager>();
 builder.Services.AddVehicles();
 builder.Services.AddCategories();
+
+builder.Services.AddBlazoredModal();
+//builder.Services.AddBlazoredToast();
 
 builder.Services.AddFluxor(o =>
 {
@@ -39,7 +43,6 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
 
 app.UseRouting();

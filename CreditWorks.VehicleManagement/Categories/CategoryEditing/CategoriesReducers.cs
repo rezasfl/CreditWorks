@@ -1,11 +1,16 @@
 ﻿using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions;
 using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions.List;
+using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions.Update;
 using Fluxor;
 
 namespace CreditWorks.VehicleManagement.Categories.CategoryEditing
 {
     public static class CategoriesReducers
     {
+        [ReducerMethod]
+        public static CategoriesState Reduce(CategoriesState _, ListAction __) =>
+            new(true, null, null);
+
         [ReducerMethod]
         public static CategoriesState Reduce(CategoriesState _, ListSuccessAction action) =>
             new(false, action.Categories, action.Categories);
@@ -17,6 +22,10 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing
         [ReducerMethod]
         public static CategoriesState Reduce(CategoriesState state, CategoriesFailureAction _) =>
             new(false, state.Original, state.UnderEdit);
+
+        [ReducerMethod]
+        public static CategoriesState Reduce(CategoriesState state, UpdateAction __) =>
+            new(true, state.Original, state.UnderEdit);
 
         [ReducerMethod]
         public static CategoriesState Reduce(CategoriesState _, ClearStateAction __)

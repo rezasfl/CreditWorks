@@ -1,3 +1,4 @@
+using Blazored.Modal.Services;
 using CreditWorks.VehicleManagement.Shared.Models;
 using Fluxor;
 using Fluxor.Blazor.Web.Components;
@@ -12,23 +13,42 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
         [Inject] public IState<CategoriesState>? State { get; set; }
         [Inject] public CategoriesFacade? Facade { get; set; }
 
+        [CascadingParameter] public IModalService? Modal { get; set; }
+
         protected override void OnParametersSet()
         {
-            if (Category != null)
+            if (State?.Value.UnderEdit != null && Category != null)
             {
                 _name = Category.Name;
                 _minWeight = Category.MinWeight;
                 _maxWeight = Category.MaxWeight;
                 _icon = Category.Icon;
 
-                _maxWeightMin = _minWeight + 1;
-                _minWeightMax = _maxWeight - 1;
+                //getting heavier and lighter categories
+                var lighterCategory = State.Value.UnderEdit.Categories.FirstOrDefault(c => c.MaxWeight > Category.MinWeight);
+                var heavierCategory = State.Value.UnderEdit.Categories.FirstOrDefault(c => c.MinWeight > Category.MaxWeight);
+
+                //setting _minWeightMax to the maximum weight of the lighter category + 1
+                if (lighterCategory != null)
+                {
+                    _minWeightMax = Math.Max(lighterCategory!.MaxWeight!.Value, (_minWeight.HasValue ? _minWeight.Value : 0) + 1);
+                }
+
+                //setting _maxWeightMax to the minimum weight of the heavier category - 1
+                if (heavierCategory != null)
+                {
+                    if (lighterCategory != null)
+                        _maxWeightMax = Math.Max(lighterCategory!.MinWeight!.Value, _maxWeight.HasValue ? _maxWeight.Value : 0);
+
+                    if (_maxWeightMax > 0)
+                        _maxWeightMax--;
+                }
             }
 
             base.OnParametersSet();
         }
 
-        private float? _maxWeightMin;
+        private float? _maxWeightMax;
         private float? _minWeightMax;
 
         private string? _name;
@@ -48,9 +68,6 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
             get => _minWeight;
             set
             {
-                if (value > _maxWeight)
-                    return;
-
                 if (_minWeight != value)
                     Facade?.SetCategoryMinWeight(Category, value);
             }
@@ -62,9 +79,6 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
             get => _maxWeight;
             set
             {
-                if (_minWeight > value)
-                    return;
-
                 if (_maxWeight != value)
                     Facade?.SetCategoryMaxWeight(Category, value);
             }

@@ -19,9 +19,9 @@
 
         public bool CanSave => ModelIsValid();
 
-        internal static Category Create(int id)
+        internal static Category Create(int id, float? nextMinWeight, float? nextMaxWeight)
         {
-            return new(id, "NEW", null, null, null);
+            return new(id, "NEW", nextMinWeight, nextMaxWeight, null);
         }
 
         internal Category SetIcon(string? icon)
@@ -34,17 +34,11 @@
 
         internal Category SetMaxWeight(float? maxWeight)
         {
-            if (MinWeight > maxWeight)
-                return this;
-
             return new(Id, Name, MinWeight, maxWeight, Icon);
         }
 
         internal Category SetMinWeight(float? minWeight)
         {
-            if (MinWeight > MaxWeight)
-                return this;
-
             return new(Id, Name, minWeight, MaxWeight, Icon);
         }
 

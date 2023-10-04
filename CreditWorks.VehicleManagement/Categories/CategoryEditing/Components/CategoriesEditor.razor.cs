@@ -1,4 +1,7 @@
+using Blazored.Modal;
+using Blazored.Modal.Services;
 using CreditWorks.VehicleManagement.Shared.Models;
+using CreditWorks.VehicleManagement.SharedComponents;
 using Fluxor;
 using Fluxor.Blazor.Web.Components;
 using Microsoft.AspNetCore.Components;
@@ -9,6 +12,9 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
     {
         [Inject] public IState<CategoriesState>? State { get; set; }
         [Inject] public CategoriesFacade? Facade { get; set; }
+
+        [CascadingParameter] IModalService Modal { get; set; } = default!;
+        private IModalReference? _spinnerModal = null;
 
         protected override void OnInitialized()
         {
@@ -32,10 +38,20 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
         {
             if (State != null)
             {
+                if (State.Value.IsLoading && _spinnerModal == null)
+                    _spinnerModal = Modal.Show<Spinner>(string.Empty, new ModalOptions() { Class = "text-center" });
+
+                if (!State.Value.IsLoading && _spinnerModal != null)
+                {
+                    _spinnerModal?.Close();
+                    _spinnerModal = null;
+                }
+
+                StateHasChanged();
                 if (!State.Value.UnderEdit?.Categories.Any(c => c.Id == _selectedCategoryId) ?? true)
                     _selectedCategoryId = null;
                 if (!_selectedCategoryId.HasValue)
-                    _selectedCategoryId = 
+                    _selectedCategoryId =
                         State.Value.UnderEdit?.Categories.FirstOrDefault(c => c.Id == 0)?.Id ??
                         State.Value.UnderEdit?.Categories.FirstOrDefault()?.Id;
                 _selectedCategory = State.Value.UnderEdit?.Categories.FirstOrDefault(c => c.Id == _selectedCategoryId);
@@ -43,8 +59,6 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
 
             StateHasChanged();
         }
-
-
 
         private Category? _selectedCategory;
         private int? _selectedCategoryId;
@@ -68,7 +82,14 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
 
         private void SaveCategories()
         {
-            Facade?.Save();
+            if (Facade != null && Modal != null)
+            {
+                var spinnerModal = Modal.Show<Spinner>(string.Empty, new ModalOptions() { Class = "text-center" });
+
+                Facade.Save();
+
+                spinnerModal.Close();
+            }
         }
     }
 }

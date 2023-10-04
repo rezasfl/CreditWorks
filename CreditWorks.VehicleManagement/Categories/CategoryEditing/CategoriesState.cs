@@ -9,13 +9,20 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing
             IsLoading = isLoading;
             Original = original;
             UnderEdit = underEdit;
+
+            if (underEdit != null)
+                CategoriesListValidation = CategoriesListValidation.Validate(underEdit);
+            else
+                CategoriesListValidation = CategoriesListValidation.Empty();
         }
 
         public bool IsLoading { get; }
-        public CategoriesList? Original { get; }
-        public CategoriesList? UnderEdit { get; }
         public bool IsNew => Original == null;
         public bool HasEdits => Original != UnderEdit;
+
+        public CategoriesList? Original { get; }
+        public CategoriesList? UnderEdit { get; }
+        public CategoriesListValidation CategoriesListValidation { get; }
         public bool CanSave => HasEdits && (UnderEdit?.CanSave ?? false);
     }
 }
