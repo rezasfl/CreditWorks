@@ -1,4 +1,5 @@
 ﻿using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions;
+using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions.Delete;
 using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions.List;
 using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions.Update;
 using Fluxor;
@@ -25,6 +26,10 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing
 
         [ReducerMethod]
         public static CategoriesState Reduce(CategoriesState state, UpdateAction __) =>
+            new(true, state.Original, state.UnderEdit);
+
+        [ReducerMethod]
+        public static CategoriesState Reduce(CategoriesState state, DeleteAction __) =>
             new(true, state.Original, state.UnderEdit);
 
         [ReducerMethod]
