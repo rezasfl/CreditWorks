@@ -13,7 +13,7 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing
         }
 
         public Category Category { get; }
-        public bool HasErrors => !NameIsValid;
+        public bool HasErrors => !NameIsValid || !IconIsValid || !WeightIsValid;
         public bool NameIsValid { get; }
         public bool IconIsValid { get; }
         public bool WeightIsValid { get; }

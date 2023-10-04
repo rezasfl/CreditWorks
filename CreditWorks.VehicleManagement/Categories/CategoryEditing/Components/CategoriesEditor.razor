@@ -11,7 +11,7 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <p class="align-self-center fw-bold m-0">Categories</p>
-                    <button class="btn btn-success btn-sm" disabled="@_validation.CategoryValidations.Any(c => c.HasErrors)" @onclick="AddCategory" title="Add a new Category">Add category</button>
+                    <button class="btn btn-success btn-sm" disabled="@_validation.HasErros" @onclick="AddCategory" title="Add a new Category">Add category</button>
                 </div>
             </div>
             <div class="card-body p-0">
@@ -31,7 +31,7 @@
                                         foreach (var category in categories)
                                         {
                                             var validation = _validation?.Errors.FirstOrDefault(v => v.category == category);
-                                            <option class="p-2 rounded-start text-truncate @GenerateBgColor(validation?.error)" title="@validation?.error" value="@category.Id">@category.Name</option>
+                                            <option class="p-2 rounded-start text-truncate @GenerateBgColor(validation?.error)" title="@validation?.error" value="@category.Id">@GenerateName(category)</option>
                                         }
                                     }
                                 </select>

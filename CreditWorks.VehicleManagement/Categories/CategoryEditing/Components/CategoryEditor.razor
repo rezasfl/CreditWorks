@@ -8,7 +8,7 @@
         <div class="px-3 row">
             <div class="col-12 col-md-6 mt-2">
                 <p> Name </p>
-                <input @bind="Name" class="form-control form-control-sm" placeholder="Enter name" />
+                <input @bind="Name" @bind:event="oninput" class="form-control form-control-sm" placeholder="Enter name" />
             </div>
             <div class="col-12 col-md-6 mt-2">
                 <p> Icon <span class="text-black-50" @onclick="ResetIcon">reset</span></p>
@@ -35,13 +35,13 @@
             </div>
             <div class="col-12 col-md-6 mt-2">
                 <p> Min weight (kgs) @MinWeight?.ToString("0.00") </p>
-                <input type="number" @bind-value="MinWeight" @bind-value:event="oninput" step="0.01" class="form-control form-control-sm" min="0" max="@_minWeightMax" />
+                <input type="number" step="0.01" class="form-control form-control-sm" min="0" max="@_minWeightMax" @bind="MinWeight" @bind:event="oninput" />
                 <MatSlider @bind-Value="@MinWeight" Step="(float)0.01" EnableStep="true" ValueMin="0" ValueMax="_minWeightMax" Pin="true" TValue="float?" Discrete="true"></MatSlider>
             </div>
             <div class="col-12 col-md-6 mt-2">
                 <p> Max weight (kgs) @MaxWeight?.ToString("0.00")</p>
-                <input type="number" class="form-control form-control-sm" min="@_maxWeightMax" max="10000" step="0.01" @bind-value="MaxWeight" @bind-value:event="oninput" />
-                <MatSlider @bind-Value="@MaxWeight" Step="(float)0.01" EnableStep="true" ValueMin="_maxWeightMax" ValueMax="10000"  Pin="true" TValue="float?" Discrete="true"></MatSlider>
+                <input type="number" class="form-control form-control-sm" min="@_maxWeightMax" max="10000" step="0.01" @bind="MaxWeight" @bind:event="oninput" />
+                <MatSlider @bind-Value="@MaxWeight" Step="(float)0.01" EnableStep="true" ValueMin="_maxWeightMax" ValueMax="10000" Pin="true" TValue="float?" Discrete="true"></MatSlider>
             </div>
         </div>
 

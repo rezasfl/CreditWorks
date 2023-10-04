@@ -80,6 +80,14 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
             }
         }
 
+        private string GenerateName(Category category)
+        {
+            if (string.IsNullOrWhiteSpace(category.Name))
+                return "NOT SET";
+
+            return category.Name;
+        }
+
         private string GenerateBgColor(string? error)
         {
             if (!string.IsNullOrWhiteSpace(error))
