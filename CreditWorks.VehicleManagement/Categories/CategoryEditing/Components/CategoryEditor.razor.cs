@@ -1,5 +1,5 @@
 using Blazored.Modal.Services;
-using CreditWorks.VehicleManagement.Shared.Models;
+using CreditWorks.VehicleManagement.Categories.CategoryEditing.Models;
 using Fluxor;
 using Fluxor.Blazor.Web.Components;
 using Microsoft.AspNetCore.Components;

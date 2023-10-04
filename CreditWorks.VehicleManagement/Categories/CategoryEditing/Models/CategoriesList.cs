@@ -1,7 +1,7 @@
 ﻿using CreditWorks.VehicleManagement.Data.Models;
 using System.Collections.Immutable;
 
-namespace CreditWorks.VehicleManagement.Shared.Models
+namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Models
 {
     public class CategoriesList
     {
@@ -27,7 +27,7 @@ namespace CreditWorks.VehicleManagement.Shared.Models
             for (int i = 0; i < orderedCategories.Count; i++)
             {
                 var currentCategory = orderedCategories[i];
-                var nextCategory = (orderedCategories.Count - 1) > i ? orderedCategories[i + 1] : null;
+                var nextCategory = orderedCategories.Count - 1 > i ? orderedCategories[i + 1] : null;
 
                 //Set nextMinWeight to the MaxWeight of the category that its MinWeight is less than the current minWeight.
                 if (currentCategory.MaxWeight > nextMinWeight)

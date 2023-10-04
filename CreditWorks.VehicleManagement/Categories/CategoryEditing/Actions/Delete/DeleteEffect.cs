@@ -1,6 +1,6 @@
 ﻿using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions.List;
+using CreditWorks.VehicleManagement.Categories.CategoryEditing.Models;
 using CreditWorks.VehicleManagement.Core.Managers;
-using CreditWorks.VehicleManagement.Shared.Models;
 using Fluxor;
 using System.Collections.Immutable;
 

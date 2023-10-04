@@ -1,4 +1,4 @@
-﻿using CreditWorks.VehicleManagement.Shared.Models;
+﻿using CreditWorks.VehicleManagement.Categories.CategoryEditing.Models;
 
 namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions
 {

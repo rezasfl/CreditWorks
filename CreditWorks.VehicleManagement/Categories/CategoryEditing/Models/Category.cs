@@ -1,4 +1,4 @@
-﻿namespace CreditWorks.VehicleManagement.Shared.Models
+﻿namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Models
 {
     public class Category
     {
@@ -34,16 +34,25 @@
 
         internal Category SetMaxWeight(float? maxWeight)
         {
+            if (MaxWeight == maxWeight)
+                return this;
+
             return new(Id, Name, MinWeight, maxWeight, Icon);
         }
 
         internal Category SetMinWeight(float? minWeight)
         {
+            if (MinWeight == minWeight)
+                return this;
+
             return new(Id, Name, minWeight, MaxWeight, Icon);
         }
 
         internal Category SetName(string? name)
         {
+            if (Name == name)
+                return this;
+
             return new(Id, name, MinWeight, MaxWeight, Icon);
         }
 

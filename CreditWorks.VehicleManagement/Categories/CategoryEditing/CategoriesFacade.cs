@@ -2,7 +2,7 @@
 using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions.Delete;
 using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions.List;
 using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions.Update;
-using CreditWorks.VehicleManagement.Shared.Models;
+using CreditWorks.VehicleManagement.Categories.CategoryEditing.Models;
 using Fluxor;
 
 namespace CreditWorks.VehicleManagement.Categories.CategoryEditing

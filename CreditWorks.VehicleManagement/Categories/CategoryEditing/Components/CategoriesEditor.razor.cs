@@ -1,6 +1,6 @@
 using Blazored.Modal;
 using Blazored.Modal.Services;
-using CreditWorks.VehicleManagement.Shared.Models;
+using CreditWorks.VehicleManagement.Categories.CategoryEditing.Models;
 using CreditWorks.VehicleManagement.SharedComponents;
 using Fluxor;
 using Fluxor.Blazor.Web.Components;

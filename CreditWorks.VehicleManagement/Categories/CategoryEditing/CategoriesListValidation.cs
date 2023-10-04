@@ -1,4 +1,4 @@
-﻿using CreditWorks.VehicleManagement.Shared.Models;
+﻿using CreditWorks.VehicleManagement.Categories.CategoryEditing.Models;
 using System.Collections.Immutable;
 
 namespace CreditWorks.VehicleManagement.Categories.CategoryEditing
