@@ -72,7 +72,7 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
             get => _year;
             set
             {
-                if (value < 1800 || value > DateTime.Now.Year)
+                if (value > DateTime.Now.Year)
                     return;
 
                 if (_year != value)
@@ -89,8 +89,10 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
                 if (value < 0)
                     return;
 
+                var category = VehicleListState?.Value.Categories.FirstOrDefault(c => c.MinWeight <= value && value <= c.MaxWeight)?.Id;
+
                 if (_weight != value)
-                    Facade?.SetWeight(value);
+                    Facade?.SetWeightAndCategory(value, category);
             }
         }
 
@@ -102,6 +104,11 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
                 result += $" ({Owner})";
 
             return result;
+        }
+
+        private void SaveCategory()
+        {
+            Facade?.SaveVehicle();
         }
 
         protected override void Dispose(bool disposing)

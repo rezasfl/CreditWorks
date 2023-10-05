@@ -1,5 +1,7 @@
 ﻿using CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Actions;
+using CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Actions.Create;
 using CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Actions.Load;
+using CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Actions.Update;
 using Fluxor;
 
 namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
@@ -24,7 +26,14 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
 
         internal void Create()
         {
-            throw new NotImplementedException();
+            _logger.LogInformation($"Creating new vehicle");
+            _dispatcher.Dispatch(new CreateAction());
+        }
+
+        internal void SaveVehicle()
+        {
+            _logger.LogInformation($"Saving new vehicle");
+            _dispatcher.Dispatch(new SaveAction());
         }
 
         internal void Load(string id)
@@ -39,9 +48,9 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
             {
                 _logger.LogInformation($"Setting vehicle's owner");
 
-                var categories = _state.Value.UnderEdit.SetOwner(owner);
+                var vehicle = _state.Value.UnderEdit.SetOwner(owner);
 
-                _dispatcher.Dispatch(new VehicleSuccessAction(categories));
+                _dispatcher.Dispatch(new VehicleSuccessAction(vehicle));
             }
             else
             {
@@ -57,9 +66,9 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
             {
                 _logger.LogInformation($"Setting vehicle's manufacturer");
 
-                var categories = _state.Value.UnderEdit.SetManufacturer(manufacturer);
+                var vehicle = _state.Value.UnderEdit.SetManufacturer(manufacturer);
 
-                _dispatcher.Dispatch(new VehicleSuccessAction(categories));
+                _dispatcher.Dispatch(new VehicleSuccessAction(vehicle));
             }
             else
             {
@@ -75,9 +84,9 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
             {
                 _logger.LogInformation($"Setting vehicle's year");
 
-                var categories = _state.Value.UnderEdit.SetYear(year);
+                var vehicle = _state.Value.UnderEdit.SetYear(year);
 
-                _dispatcher.Dispatch(new VehicleSuccessAction(categories));
+                _dispatcher.Dispatch(new VehicleSuccessAction(vehicle));
             }
             else
             {
@@ -87,15 +96,15 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
             }
         }
 
-        internal void SetWeight(float? weight)
+        internal void SetWeightAndCategory(float? weight, int? category)
         {
             if (_state.Value.UnderEdit != null)
             {
                 _logger.LogInformation($"Setting vehicle's weight");
 
-                var categories = _state.Value.UnderEdit.SetWeight(weight);
+                var vehicle = _state.Value.UnderEdit.SetWeightAndCategory(weight, category);
 
-                _dispatcher.Dispatch(new VehicleSuccessAction(categories));
+                _dispatcher.Dispatch(new VehicleSuccessAction(vehicle));
             }
             else
             {
