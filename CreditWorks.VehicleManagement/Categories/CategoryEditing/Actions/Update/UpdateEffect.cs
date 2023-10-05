@@ -42,8 +42,6 @@ namespace CreditWorks.Categories.CategoryEditing.VehicleListing.Actions.Update
                 var errorMessage = $"Error updating categories, reason: {ex.Message}";
                 _logger.LogError("{Message}", errorMessage);
                 dispatcher.Dispatch(new CategoriesFailureAction(ex.Message));
-
-                //TODO: UI flux effect for showing error in UI
             }
         }
 

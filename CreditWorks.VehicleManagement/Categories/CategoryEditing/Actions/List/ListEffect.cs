@@ -30,8 +30,6 @@ namespace CreditWorks.Categories.CategoryEditing.VehicleListing.Actions.List
             {
                 _logger.LogError($"Error loading vehicle list, reason: {ex.Message}");
                 dispatcher.Dispatch(new CategoriesFailureAction(ex.Message));
-
-                //TODO: UI flux effect for showing error in UI
             }
         }
 
