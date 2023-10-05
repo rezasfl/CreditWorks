@@ -5,25 +5,38 @@
 @if (State != null && !State.Value.IsLoading)
 {
     <div class="container">
-        <div class="border-bottom pb-4 mb-4 d-flex align-items-center justify-content-between">
-            <div>
-                <p class="fw-bold h3 m-0">Vehicles</p>
-                <div aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page">Vehicles</li>
-                    </ol>
+        @if (!State.Value.Categories.Any() || !State.Value.Manufacturers.Any())
+        {
+            <ol>
+                <li>
+                    <p>Please ensure you have set up your Database.</p>
+                </li>
+                <li>
+                    <p>For more information visit the <a href="/categories">Categories</a> page.</p>
+                </li>
+            </ol>
+        }
+        else
+        {
+            <div class="border-bottom pb-4 mb-4 d-flex align-items-center justify-content-between">
+                <div>
+                    <p class="fw-bold h3 m-0">Vehicles</p>
+                    <div aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active" aria-current="page">Vehicles</li>
+                        </ol>
+                    </div>
                 </div>
-            </div>
 
                 @if (!State.Value.Categories.Any() || !State.Value.Manufacturers.Any())
                 {
-            <div>
+                    <div>
                         <button class="btn btn-success btn-sm" @onclick="OnCreateClicked">
                             Add vehicle
-                </button>
-            </div>
+                        </button>
+                    </div>
                 }
-        </div>
+            </div>
 
             @if (!State.Value.Categories.Any() || !State.Value.Manufacturers.Any())
             {
@@ -31,39 +44,39 @@
             }
             else
             {
-        <div class="card rounded-3">
-            <div class="overflow-y-hidden table-responsive border-top">
-                <table class="mb-0 table table-borderless table-hover text-black-50 text-nowrap">
-                    <thead class="table-light">
+                <div class="card rounded-3">
+                    <div class="overflow-y-hidden table-responsive border-top">
+                        <table class="mb-0 table table-borderless table-hover text-black-50 text-nowrap">
+                            <thead class="table-light">
                                 <VehicleListTableHeader />
-                    </thead>
-                    <tbody>
-                        @if (!State.Value.Vehicles.Any())
-                        {
-                            <tr class="border-top">
-                                <td colspan="100">
-                                    <p class="h6 mb-0 p-2 text-muted text-center">There are no vehicles 😅</p>
-                                </td>
-                            </tr>
-                        }
-                        @foreach (var vehicle in State.Value.Vehicles)
-                        {
-                            <tr class="border-top text-black" style="cursor:pointer;" @onclick="() => OnVehicleRowClicked(vehicle)">
-                                <td>
-                                    <p class="fw-bold h6 mb-0" href="@($"/vehicles/{vehicle.Id}")">@vehicle.Owner</p>
-                                </td>
-                                <td>@State.Value.Manufacturers.Single(m => m.Id == vehicle.Manifacturer).Name </td>
-                                <td>@vehicle.Year </td>
-                                @{
-                                    var category = State.Value.Categories.Single(m => m.Id == vehicle.Category);
+                            </thead>
+                            <tbody>
+                                @if (!State.Value.Vehicles.Any())
+                                {
+                                    <tr class="border-top">
+                                        <td colspan="100">
+                                            <p class="h6 mb-0 p-2 text-muted text-center">There are no vehicles 😅</p>
+                                        </td>
+                                    </tr>
                                 }
-                                <td colspan="2"><span><i class="@category.Icon"></i></span> </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                                @foreach (var vehicle in State.Value.Vehicles)
+                                {
+                                    <tr class="border-top text-black" style="cursor:pointer;" @onclick="() => OnVehicleRowClicked(vehicle)">
+                                        <td>
+                                            <p class="fw-bold h6 mb-0" href="@($"/vehicles/{vehicle.Id}")">@vehicle.Owner</p>
+                                        </td>
+                                        <td>@State.Value.Manufacturers.Single(m => m.Id == vehicle.Manifacturer).Name </td>
+                                        <td>@vehicle.Year </td>
+                                        @{
+                                            var category = State.Value.Categories.Single(m => m.Id == vehicle.Category);
+                                        }
+                                        <td colspan="2"><span><i class="@category.Icon"></i></span> </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             }
         }
     </div>

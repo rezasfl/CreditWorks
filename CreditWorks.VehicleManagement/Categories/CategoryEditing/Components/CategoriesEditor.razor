@@ -4,9 +4,20 @@
 
 @inherits FluxorComponent
 
-@if (State != null && State.Value.UnderEdit != null && _validation != null)
-{
-    <div class="container">
+<div class="container">
+    @if (State?.Value.UnderEdit == null)
+    {
+        <ol>
+            <li>
+                <p>Please ensure you have run the "Update-Database" command in Package Manager Console to set up the necessary tables and data in your SQL Server Database 😊</p>
+            </li>
+            <li>
+                <p>To do so, click on <strong> Tools > NuGet Package Manager > Package Manager Console</strong> in your Visual Studio.</p>
+            </li>
+        </ol>
+    }
+    else
+    {
         <div class="card rounded-3">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
@@ -44,14 +55,12 @@
                             }
                         </div>
                     </div>
-                }
-                <div class="m-3">
-                    <button class="btn btn-sm btn-success me-4 @(State.Value.CanSave ? "" : "disabled")" @onclick="SaveCategories" disabled="@(!State.Value.CanSave)">Save</button>
+                    <div class="m-3">
+                        <button class="btn btn-sm btn-success me-4 @(State.Value.CanSave ? "" : "disabled")" @onclick="SaveCategories" disabled="@(!State.Value.CanSave)">Save</button>
                         <button @onclick="Facade.CancelChanges" disabled="@(!State.Value.HasEdits)" class="btn btn-sm btn-secondary"> @GenerateCancelButtonText() </button>
                     </div>
-                    }
-                </div>
+                }
             </div>
         </div>
-    </div>
-}
+    }
+</div>
