@@ -3,7 +3,9 @@ A simple user interface for managing vehicles.
 
 
 This project is written in C# and targeted for .Net7 and uses simple entity framework to set up the required tables and data.
-Fluxor is used as the state management for this app. You can find more about Fluxor (Flux/Redux pattern for Blazor) [here](https://github.com/mrpmorris/Fluxor/).
+
+
+I have used Fluxor to manage different states within the application. You can find more about Fluxor (Flux/Redux pattern for Blazor) [here](https://github.com/mrpmorris/Fluxor/).
 
 
 # Getting started
