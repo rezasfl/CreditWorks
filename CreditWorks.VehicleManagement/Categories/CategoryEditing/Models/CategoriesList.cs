@@ -44,9 +44,9 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Models
                     nextMaxWeight = nextCategory.MinWeight + 0.01f;
             }
 
-            var newContact = Category.Create(newId, nextMinWeight, nextMaxWeight);
+            var newCategory = Category.Create(newId, nextMinWeight, nextMaxWeight);
 
-            return new(Categories.Add(newContact));
+            return new(Categories.Add(newCategory));
         }
 
         internal CategoriesList SetCategoryMaxWeight(Category oldCategory, float? maxWeight)
