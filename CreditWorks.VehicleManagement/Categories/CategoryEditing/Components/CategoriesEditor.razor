@@ -9,10 +9,19 @@
     {
         <ol>
             <li>
-                <p>Please ensure you have run the "Update-Database" command in Package Manager Console to set up the necessary tables and data in your SQL Server Database 😊</p>
+                <p>Please ensure you have SQL Server installed. 😊</p>
+            </li>
+            <li>
+                <p>Please ensure you set the Default ConnectionString in appsettings.json</p>
+            </li>
+            <li>
+                <p>Run the "Update-Database" command in Package Manager Console to set up the necessary tables and data in your SQL Server Database</p>
             </li>
             <li>
                 <p>To do so, click on <strong> Tools > NuGet Package Manager > Package Manager Console</strong> in your Visual Studio.</p>
+            </li>
+            <li>
+                <p>If there are any Database issues, add <strong>TrustServerCertificate=True;</strong> at the end of your connection string.</p>
             </li>
         </ol>
     }
