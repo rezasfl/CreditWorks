@@ -1,6 +1,4 @@
 ﻿namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Actions.Update
 {
-    public class UpdateAction
-    {
-    }
+    public class SaveAction { }
 }
