@@ -1,5 +1,6 @@
 # CreditWorks
-A simple user interface for managing vehicles
+A simple user interface for managing vehicles.
+This project is written in C# and targeted for .Net7 and uses simple entity framework to set up the required tables and data.
 
 
 # Getting started
@@ -11,3 +12,13 @@ A simple user interface for managing vehicles
 1. Click on ```Tools > NuGet Package Manager > Package Manager Console ``` in your Visual Studio.
 1. If there are any Database issues, add ```TrustServerCertificate=True;``` at the end of your connection string.
 1. If there are any other issues, please get in touch 😊
+
+## Use Cases
+For categories, as a user, I should be able to:
+1. Create new vehicles and edit their details
+2. Update existing vehicles
+3. View vehicles list
+4. Sort vehicles by their owner, year, manufacturer, and category
+5. Create, change, and delete Categories
+6. Set an icon for each category
+7. See the new icon in the vehicle list
