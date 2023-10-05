@@ -44,7 +44,7 @@
                     <div class="row g-0">
                         <div class="border-0 border-end col-12 col-md-3 col-sm-4 d-flex flex-column justify-content-between p-0">
                             <div>
-                                <select @bind="SelectedCategoryId" class="bg-white border-0 form-control h-100 overflow-auto p-1 ps-1 w-100" size="@(Math.Max(2, (State?.Value.UnderEdit?.Categories.Count) ?? 0))">
+                                <select @bind="SelectedCategoryId" class="bg-white border-0 form-control h-100 overflow-auto p-1 ps-1 w-100" size="@(Math.Max(2, (State?.Value.UnderEdit?.Categories.Count) ?? 0))" style="box-shadow: none;">
                                     @{
                                         var categories = State?.Value.UnderEdit.Categories;
 
