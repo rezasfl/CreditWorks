@@ -40,12 +40,7 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Actions.Save
                     else
                         await _manager.CreateVehicle(dbVehicle);
 
-                    dispatcher.Dispatch(
-                        new ListAction(
-                            _listState.Value.SortedByOwner,
-                            _listState.Value.Manufacturer,
-                            _listState.Value.SortedByYear,
-                            _listState.Value.Category));
+                    dispatcher.Dispatch(new SaveSuccessAction());
                 }
             }
             catch (Exception ex)
