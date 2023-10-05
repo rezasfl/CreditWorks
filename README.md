@@ -14,7 +14,7 @@ This project is written in C# and targeted for .Net7 and uses simple entity fram
 1. If there are any other issues, please get in touch 😊
 
 ## Use Cases
-For categories, as a user, I should be able to:
+As a user, I should be able to:
 1. Create new vehicles and edit their details
 2. Update existing vehicles
 3. View vehicles list
