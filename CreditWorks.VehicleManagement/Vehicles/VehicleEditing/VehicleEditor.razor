@@ -54,6 +54,14 @@
 
             <div class="my-3">
                 <button @onclick="SaveCategory" disabled="@(!State.Value.CanSave)" class="@GenerateBtnClass()">Save</button>
+                @if (State.Value.IsNew)
+                {
+                    <button @onclick="Cancel" class="btn btn-sm btn-outline-secondary">Cancel</button>
+                }
+                else
+                {
+                    <button @onclick="CancelChanges" disabled="@(!State.Value.HasEdits)" class="btn btn-sm btn-outline-secondary ms-3">Cancel changes</button>
+                }
             </div>
         </div>
     }

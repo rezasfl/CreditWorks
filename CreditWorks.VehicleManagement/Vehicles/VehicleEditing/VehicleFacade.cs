@@ -24,6 +24,11 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
             _dispatcher.Dispatch(new ClearStateAction());
         }
 
+        internal void CancelChanges()
+        {
+            _dispatcher.Dispatch(new CancelChangesAction());
+        }
+
         internal void Create()
         {
             _logger.LogInformation($"Creating new vehicle");

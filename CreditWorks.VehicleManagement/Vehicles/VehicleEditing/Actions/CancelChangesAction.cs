@@ -1,6 +1,4 @@
 ﻿namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Actions
 {
-    public class CancelChangesAction
-    {
-    }
+    public class CancelChangesAction { }
 }

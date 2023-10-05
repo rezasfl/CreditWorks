@@ -111,6 +111,16 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
             Facade?.SaveVehicle();
         }
 
+        private void Cancel()
+        {
+            Facade?.ClearState();
+        }
+
+        private void CancelChanges()
+        {
+            Facade?.CancelChanges();
+        }
+
         private string GenerateBtnClass()
         {
             if (!State?.Value.CanSave ?? false)
