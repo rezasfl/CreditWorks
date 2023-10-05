@@ -16,7 +16,7 @@ I have used Fluxor to manage different states within the application. You can fi
 # Accessing Package Manager Console
 1. Click on ```Tools > NuGet Package Manager > Package Manager Console ``` in your Visual Studio.
 1. If there are any Database issues, add ```TrustServerCertificate=True;``` at the end of your connection string.
-1. If there are any other issues, please get in touch 😊
+1. If there are any other issues (or you manage to break the app, somehow), please get in touch 😊
 
 ## Use Cases
 As a user, I should be able to:
