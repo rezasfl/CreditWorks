@@ -5,9 +5,7 @@
 <tr>
     <th>
         <div class="d-flex">
-            <p class="m-0">
-                Owner
-            </p>
+            <p> Owner </p>
             <p class="align-items-center d-flex m-0 ms-2 text-black-50">
                 <i class="fa-solid fa-arrow-down-a-z"></i>
                 <input class="form-check ms-1" type="checkbox" @bind="SortedByOwner" />
@@ -16,9 +14,7 @@
     </th>
     <th>
         <div class="align-items-center d-flex">
-            <p class="m-0">
-                Manufacturer
-            </p>
+            <p> Manufacturer</p>
             <select class="form-select form-select-sm ms-1" @bind="SelectedManufacturer">
                 <option value="" selected disabled hidden>All</option>
                 @foreach (var manufacturer in State!.Value.Manufacturers)
@@ -30,18 +26,16 @@
     </th>
     <th>
         <div class="d-flex">
-            <p class="m-0"> Year</p>
+            <p> Year</p>
             <p class="align-items-center d-flex m-0 ms-2 text-black-50">
                 <i class="fa-solid fa-arrow-down-1-9"></i>
-                <input class="form-check ms-1" type="checkbox" @bind="Year" />
+                <input class="form-check ms-1" type="checkbox" @bind="SortedByYear" />
             </p>
         </div>
     </th>
     <th>
         <div class="align-items-center d-flex">
-            <p class="m-0">
-                Category
-            </p>
+            <p> Category </p>
             <select class="form-select form-select-sm ms-1" @bind="Category">
                 <option value="" selected disabled hidden>All</option>
                 @foreach (var category in State.Value.Categories)

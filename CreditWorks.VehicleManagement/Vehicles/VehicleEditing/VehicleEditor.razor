@@ -60,7 +60,14 @@
                 }
                 else
                 {
-                    <button @onclick="CancelChanges" disabled="@(!State.Value.HasEdits)" class="btn btn-sm btn-outline-secondary ms-3">Cancel changes</button>
+                    if (State.Value.HasEdits)
+                    {
+                        <button @onclick="CancelChanges" class="btn btn-sm btn-outline-secondary ms-3">Cancel changes</button>
+                    }
+                    else
+                    {
+                        <button @onclick="Close" class="btn btn-sm btn-outline-secondary ms-3">Close</button>
+                    }
                 }
             </div>
         </div>

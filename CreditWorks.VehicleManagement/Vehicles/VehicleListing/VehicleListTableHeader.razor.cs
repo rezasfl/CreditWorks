@@ -14,20 +14,6 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing
             base.OnInitialized();
 
             if (State != null)
-                State.StateChanged += StateChanged;
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && State != null)
-                State.StateChanged -= StateChanged;
-
-            base.Dispose(disposing);
-        }
-
-        private void StateChanged(object? sender, EventArgs e)
-        {
-            if (State != null)
             {
                 _sortedByOwner = State.Value.SortedByOwner;
                 _selectedManufacturer = State.Value.Manufacturer;
@@ -62,12 +48,12 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing
 
                 value = value.HasValue && value.Value > 0 ? value : null;
 
-                Facade?.List(SortedByOwner, value, Year, Category);
+                Facade?.List(SortedByOwner, value, SortedByYear, Category);
             }
         }
 
         private bool _sortedByYear;
-        public bool Year
+        public bool SortedByYear
         {
             get => _sortedByYear;
             set
@@ -90,7 +76,7 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing
 
                 value = value.HasValue && value.Value > 0 ? value : null;
 
-                Facade?.List(SortedByOwner, SelectedManufacturer, Year, value);
+                Facade?.List(SortedByOwner, SelectedManufacturer, SortedByYear, value);
             }
         }
 
