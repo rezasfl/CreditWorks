@@ -42,7 +42,7 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing.Actions.List
         private static ImmutableList<Category> GenerateCategories(IEnumerable<Data.Models.Category> categories)
         {
             return categories
-                .Select(c => new Category(c.Id, c.Name!, c.IconUrl))
+                .Select(c => new Category(c.Id, c.Name!, c.MinWeight, c.MaxWeight, c.IconUrl))
                 .ToImmutableList();
         }
 

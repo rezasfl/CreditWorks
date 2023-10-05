@@ -38,7 +38,7 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Actions.Load
 
                 if (result != null)
                 {
-                    var vehicle = new Vehicle(result.Id.ToString(), result.Manufacturer.Id, result.Category.Id, result.Owner, result.Year, result.Weight);
+                    var vehicle = new Vehicle(result.Id.ToString(), result.ManufacturerId, result.CategoryId, result.Owner, result.Year, result.Weight);
 
                     _logger.LogInformation($"Loading vehicle");
                     dispatcher.Dispatch(new LoadSuccessAction(vehicle));

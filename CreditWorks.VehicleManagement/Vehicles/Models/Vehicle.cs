@@ -1,6 +1,4 @@
-﻿using CreditWorks.VehicleManagement.Data.Models;
-
-namespace CreditWorks.VehicleManagement.Vehicles.Models
+﻿namespace CreditWorks.VehicleManagement.Vehicles.Models
 {
     public class Vehicle
     {
@@ -36,14 +34,6 @@ namespace CreditWorks.VehicleManagement.Vehicles.Models
             return new Vehicle(Id, manufacturer, Category, Owner, Year, Weight);
         }
 
-        internal Vehicle SetCategory(int category)
-        {
-            if (Category == category)
-                return this;
-
-            return new Vehicle(Id, Manufacturer, category, Owner, Year, Weight);
-        }
-
         internal Vehicle SetOwner(string? owner)
         {
             if (Owner == owner)
@@ -60,12 +50,12 @@ namespace CreditWorks.VehicleManagement.Vehicles.Models
             return new Vehicle(Id, Manufacturer, Category, Owner, year, Weight);
         }
 
-        internal Vehicle SetWeight(float? weight)
+        internal Vehicle SetWeightAndCategory(float? weight, int? category)
         {
             if (Weight == weight)
                 return this;
 
-            return new Vehicle(Id, Manufacturer, Category, Owner, Year, weight);
+            return new Vehicle(Id, Manufacturer, category, Owner, Year, weight);
         }
 
         private bool ModelIsValid()
@@ -82,6 +72,11 @@ namespace CreditWorks.VehicleManagement.Vehicles.Models
                 return false;
 
             return true;
+        }
+
+        internal static Vehicle CreateNew()
+        {
+            return new Vehicle("NEW", null, null, "NEW", null, null);
         }
     }
 }
