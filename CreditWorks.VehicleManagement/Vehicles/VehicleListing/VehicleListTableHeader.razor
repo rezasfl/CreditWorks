@@ -1,0 +1,59 @@
+﻿@using Fluxor.Blazor.Web.Components
+
+@inherits FluxorComponent
+
+<tr>
+    <th>
+        <div class="d-flex">
+            <p class="m-0">
+                Owner
+            </p>
+            <p class="align-items-center d-flex m-0 ms-2 text-black-50">
+                <i class="fa-solid fa-arrow-down-a-z"></i>
+                <input class="form-check ms-1" type="checkbox" @bind="SortedByOwner" />
+            </p>
+        </div>
+    </th>
+    <th>
+        <div class="align-items-center d-flex">
+            <p class="m-0">
+                Manufacturer
+            </p>
+            <select class="form-select form-select-sm ms-1" @bind="SelectedManufacturer">
+                <option value="" selected disabled hidden>All</option>
+                @foreach (var manufacturer in State.Value.Manufacturers)
+                {
+                    <option value="@manufacturer.Id">@manufacturer.Name</option>
+                }
+            </select>
+        </div>
+    </th>
+    <th>
+        <div class="d-flex">
+            <p class="m-0"> Year</p>
+            <p class="align-items-center d-flex m-0 ms-2 text-black-50">
+                <i class="fa-solid fa-arrow-down-1-9"></i>
+                <input class="form-check ms-1" type="checkbox" @bind="Year" />
+            </p>
+        </div>
+    </th>
+    <th>
+        <div class="align-items-center d-flex">
+            <p class="m-0">
+                Category
+            </p>
+            <select class="form-select form-select-sm ms-1" @bind="Category">
+                <option value="" selected disabled hidden>All</option>
+                @foreach (var category in State.Value.Categories)
+                {
+                    <option value="@category.Id">@category.Name</option>
+                }
+            </select>
+        </div>
+    </th>
+    <th class="text-end">
+        <button class="btn btn-sm btn-outline-danger" @onclick="ClearFilters" disabled="@(!State.Value.HasFilters)">
+            <span><i class="fa-solid fa-filter-circle-xmark"></i></span>
+        </button>
+    </th>
+</tr>

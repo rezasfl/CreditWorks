@@ -2,7 +2,7 @@
 
 @inherits Fluxor.Blazor.Web.Components.FluxorComponent
 
-@if (State != null)
+@if (State != null && !State.Value.IsLoading)
 {
     <div class="container">
         <div class="border-bottom pb-4 mb-4 d-flex align-items-center justify-content-between">
@@ -14,71 +14,28 @@
                     </ol>
                 </div>
             </div>
+
+                @if (!State.Value.Categories.Any() || !State.Value.Manufacturers.Any())
+                {
             <div>
-                <button class="btn btn-success fs-4" @onclick="OnCreateClicked">
-                    <i class="fa-light fa-users"></i>
+                        <button class="btn btn-success btn-sm" @onclick="OnCreateClicked">
+                            Add vehicle
                 </button>
             </div>
+                }
         </div>
+
+            @if (!State.Value.Categories.Any() || !State.Value.Manufacturers.Any())
+            {
+                <p> Please ensure you have at least one weight category and one manufacturer</p>
+            }
+            else
+            {
         <div class="card rounded-3">
             <div class="overflow-y-hidden table-responsive border-top">
                 <table class="mb-0 table table-borderless table-hover text-black-50 text-nowrap">
                     <thead class="table-light">
-                        <tr>
-                            <th>
-                                <div class="d-flex">
-                                    <p class="m-0">
-                                        Owner
-                                    </p>
-                                    <p class="align-items-center d-flex m-0 ms-2 text-black-50">
-                                        <i class="fa-solid fa-arrow-down-a-z"></i>
-                                        <input class="form-check ms-1" type="checkbox" @bind="SortedByOwner" />
-                                    </p>
-                                </div>
-                            </th>
-                            <th>
-                                <div class="align-items-center d-flex">
-                                    <p class="m-0">
-                                        Manufacturer
-                                    </p>
-                                    <select class="form-select form-select-sm ms-1" @bind="SelectedManufacturer">
-                                        <option value="" selected disabled hidden>All</option>
-                                        @foreach (var manufacturer in State.Value.Manufacturers)
-                                        {
-                                            <option value="@manufacturer.Id">@manufacturer.Name</option>
-                                        }
-                                    </select>
-                                </div>
-                            </th>
-                            <th>
-                                <div class="d-flex">
-                                    <p class="m-0"> Year</p>
-                                    <p class="align-items-center d-flex m-0 ms-2 text-black-50">
-                                        <i class="fa-solid fa-arrow-down-1-9"></i>
-                                        <input class="form-check ms-1" type="checkbox" @bind="Year" />
-                                    </p>
-                                </div>
-                            </th>
-                            <th>
-                                <div class="align-items-center d-flex">
-                                    <p class="m-0">
-                                        Category
-                                    </p>
-                                    <select class="form-select form-select-sm ms-1" @bind="Category">
-                                        <option value="" selected disabled hidden>All</option>
-                                        @foreach (var category in State.Value.Categories)
-                                        {
-                                            <option value="@category.Id">@category.Name</option>
-                                        }
-                                    </select>
-                                </div>
-                            </th>
-                            <th class="text-end">
-                                <button class="btn btn-sm btn-outline-danger" @onclick="ClearFilters" disabled="@(!State.Value.HasFilters)">
-                                    <span><i class="fa-solid fa-filter-circle-xmark"></i></span>
-                                </button>
-                            </th>
-                        </tr>
+                                <VehicleListTableHeader />
                     </thead>
                     <tbody>
                         @if (!State.Value.Vehicles.Any())
@@ -107,5 +64,7 @@
                 </table>
             </div>
         </div>
+            }
+        }
     </div>
 }

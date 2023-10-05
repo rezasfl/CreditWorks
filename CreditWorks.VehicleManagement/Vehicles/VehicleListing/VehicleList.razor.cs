@@ -1,3 +1,6 @@
+using Blazored.Modal;
+using Blazored.Modal.Services;
+using CreditWorks.VehicleManagement.SharedComponents;
 using CreditWorks.VehicleManagement.Vehicles.Models;
 using Fluxor;
 using Fluxor.Blazor.Web.Components;
@@ -8,8 +11,11 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing
     public partial class VehicleList : FluxorComponent
     {
         [Inject] public IState<VehicleListState>? State { get; set; }
-        [Inject] public VehicleListFacade? Facade { get; set; }
         [Inject] public NavigationManager? NavigationManager { get; set; }
+        [Inject] public VehicleListFacade? Facade { get; set; }
+
+        [CascadingParameter] IModalService Modal { get; set; } = default!;
+        private IModalReference? _spinnerModal = null;
 
         protected override void OnInitialized()
         {
@@ -33,79 +39,22 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing
         {
             if (State != null)
             {
-                _sortedByOwner = State.Value.SortedByOwner;
-                _selectedManufacturer = State.Value.Manufacturer;
-                _sortedByYear = State.Value.SortedByYear;
-                _category = State.Value.Category;
+                if (State.Value.IsLoading && _spinnerModal == null)
+                    _spinnerModal = Modal.Show<Spinner>(string.Empty, new ModalOptions() { Class = "text-center" });
+
+                if (!State.Value.IsLoading && _spinnerModal != null)
+                {
+                    _spinnerModal?.Close();
+                    _spinnerModal = null;
+                }
             }
 
             StateHasChanged();
         }
 
-        private bool _sortedByOwner;
-        public bool SortedByOwner
-        {
-            get => _sortedByOwner;
-            set
-            {
-                if (_sortedByOwner == value)
-                    return;
-
-                Facade?.List(value, SelectedManufacturer, !value, Category);
-            }
-        }
-
-        private int? _selectedManufacturer;
-        public int? SelectedManufacturer
-        {
-            get => _selectedManufacturer;
-            set
-            {
-                if (_selectedManufacturer == value)
-                    return;
-
-                value = value.HasValue && value.Value > 0 ? value : null;
-
-                Facade?.List(SortedByOwner, value, Year, Category);
-            }
-        }
-
-        private bool _sortedByYear;
-        public bool Year
-        {
-            get => _sortedByYear;
-            set
-            {
-                if (_sortedByYear == value)
-                    return;
-
-                Facade?.List(!value, SelectedManufacturer, value, Category);
-            }
-        }
-
-        private int? _category;
-        public int? Category
-        {
-            get => _category;
-            set
-            {
-                if (_category == value)
-                    return;
-
-                value = value.HasValue && value.Value > 0 ? value : null;
-
-                Facade?.List(SortedByOwner, SelectedManufacturer, Year, value);
-            }
-        }
-
         private void OnCreateClicked()
         {
             NavigationManager?.NavigateTo($"/vehicles/NEW");
-        }
-
-        private void ClearFilters()
-        {
-            Facade?.List();
         }
 
         private void OnVehicleRowClicked(VehicleListItem vehicle)
