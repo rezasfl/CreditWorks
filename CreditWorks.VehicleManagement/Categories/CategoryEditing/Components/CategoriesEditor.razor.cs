@@ -112,5 +112,15 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
                 spinnerModal.Close();
             }
         }
+
+        private string GenerateCancelButtonText()
+        {
+            string text = "Cancel changes";
+
+            if (State != null && State.Value.IsNew)
+                text = "Cancel";
+
+            return text;
+        }
     }
 }

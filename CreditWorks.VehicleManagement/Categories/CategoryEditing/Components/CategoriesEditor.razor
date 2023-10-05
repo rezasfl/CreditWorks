@@ -11,15 +11,15 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <p class="align-self-center fw-bold m-0">Categories</p>
-                    <button class="btn btn-success btn-sm" disabled="@_validation.HasErros" @onclick="AddCategory" title="Add a new Category">Add category</button>
+                    <button class="btn btn-success btn-sm" disabled="@_validation?.HasErros" @onclick="AddCategory" title="Add a new Category">Add category</button>
                 </div>
             </div>
             <div class="card-body p-0">
-                @if (!State.Value.UnderEdit.Categories.Any())
+                @if (!State?.Value.UnderEdit?.Categories.Any() ?? false)
                 {
                     <p class="h6 m-0 p-3 text-center">There are no categories 😅</p>
                 }
-                else
+                @if (State != null && State.Value.UnderEdit != null && _validation != null)
                 {
                     <div class="row g-0">
                         <div class="border-0 border-end col-12 col-md-3 col-sm-4 d-flex flex-column justify-content-between p-0">
@@ -47,13 +47,8 @@
                 }
                 <div class="m-3">
                     <button class="btn btn-sm btn-success me-4 @(State.Value.CanSave ? "" : "disabled")" @onclick="SaveCategories" disabled="@(!State.Value.CanSave)">Save</button>
-                    @if (State.Value.IsNew)
-                    {
-                        <button @onclick="Facade.CancelChanges" class="btn btn-sm btn-secondary @(State.Value.CanSave ? "btn-primary" : "btn-primary")">Cancel</button>
-                    }
-                    else if (State.Value.HasEdits)
-                    {
-                        <button @onclick="Facade.CancelChanges" class="btn btn-sm @(State.Value.CanSave ? "btn-primary" : "btn-primary")">Cancel changes</button>
+                        <button @onclick="Facade.CancelChanges" disabled="@(!State.Value.HasEdits)" class="btn btn-sm btn-secondary"> @GenerateCancelButtonText() </button>
+                    </div>
                     }
                 </div>
             </div>
