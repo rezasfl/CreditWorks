@@ -1,0 +1,27 @@
+﻿<div class="align-items-center d-flex">
+    @if (HasError ?? false)
+    {
+        <ValidationIndicator BgClass="@GenerateBgClass()" Title="@ErrorTitle" />
+    }
+    <label class="form-label small">@Label</label>
+</div>
+
+@code {
+    [Parameter] public string? Label { get; set; }
+    [Parameter] public bool? HasError { get; set; }
+    [Parameter] public string? ErrorTitle { get; set; }
+
+    private string GenerateBgClass()
+    {
+        var cssClass = string.Empty;
+
+        cssClass = "mb-2 p-2";
+
+        if (HasError ?? false)
+            cssClass += " bg-danger";
+        else
+            cssClass += $" bg-success";
+
+        return cssClass;
+    }
+}

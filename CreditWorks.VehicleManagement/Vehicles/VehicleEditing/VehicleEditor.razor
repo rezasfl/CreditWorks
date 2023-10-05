@@ -27,11 +27,11 @@
                 <div class="card-body pt-0">
                     <div class="row">
                         <div class="col-12 col-md-6 mt-3">
-                            <p>Owner's name</p>
+                            <InputLabel HasError="!State.Value.VehicleValidation.OwnerIsValid" ErrorTitle="Please enter owner name for this vehicle" Label="Owner's name" />
                             <input type="text" autocomplete="off" @bind="Owner" @bind:event="oninput" class="form-control" placeholder="Enter name" />
                         </div>
                         <div class="col-12 col-md-6 mt-3">
-                            <p>Manufacturer</p>
+                            <InputLabel HasError="!State.Value.VehicleValidation.ManufacturerIsValid" ErrorTitle="Please select a manufacturer for this vehicle" Label="Manufacturer" />
                             <select @bind="Manufacturer" class="form-select form-select-sm">
                                 <option value="" selected disabled hidden>Select an icon</option>
                                 @foreach (var manufacturer in VehicleListState.Value.Manufacturers)
@@ -41,11 +41,11 @@
                             </select>
                         </div>
                         <div class="col-12 col-md-6 mt-3">
-                            <p>Year</p>
+                            <InputLabel HasError="!State.Value.VehicleValidation.YearIsValid" ErrorTitle="Please set a year for this vehicle" Label="Year" />
                             <input type="number" min="1800" max="@DateTime.Now.Year" autocomplete="off" @bind="Year" @bind:event="oninput" class="form-control form-control-sm" placeholder="Year" />
                         </div>
                         <div class="col-12 col-md-6 mt-3">
-                            <p>Weight (kg)</p>
+                            <InputLabel HasError="!State.Value.VehicleValidation.WeightIsValid" ErrorTitle="Please set a weight for this vehicle" Label="Weight (kg)" />
                             <input type="number" max="@DateTime.Now.Year" autocomplete="off" min="1" @bind="Weight" @bind:event="oninput" class="form-control form-control-sm" placeholder="Weight" />
                         </div>
                     </div>
