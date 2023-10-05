@@ -19,6 +19,8 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
         {
             if (State?.Value.UnderEdit != null && Category != null)
             {
+                _validation = State.Value.CategoriesListValidation.CategoryValidations.First(v => v.Category == Category);
+
                 _name = Category.Name;
                 _minWeight = Category.MinWeight;
                 _maxWeight = Category.MaxWeight;
@@ -47,6 +49,8 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
 
             base.OnParametersSet();
         }
+
+        private CategoryValidation? _validation;
 
         private float? _maxWeightMax;
         private float? _minWeightMax;

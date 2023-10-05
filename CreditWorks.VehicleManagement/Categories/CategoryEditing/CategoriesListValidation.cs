@@ -40,8 +40,11 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing
                 if (!categoryValidation.IconIsValid)
                     exceptions.Add((category, $"Please set this category's icon"));
 
-                if (!categoryValidation.WeightIsValid)
-                    exceptions.Add((category, $"Please set a valid weight range for this category"));
+                if (!categoryValidation.MinWeightIsValid)
+                    exceptions.Add((category, $"Please set a valid minimum weight for this category"));
+
+                if (!categoryValidation.MaxWeightIsValid)
+                    exceptions.Add((category, $"Please set a valid maximum weight for this category"));
             }
             return exceptions;
         }
