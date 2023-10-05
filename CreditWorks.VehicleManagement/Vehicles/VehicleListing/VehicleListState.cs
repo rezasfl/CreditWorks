@@ -1,5 +1,4 @@
-﻿using CreditWorks.VehicleManagement.Shared.Models;
-using CreditWorks.VehicleManagement.Vehicles.Models;
+﻿using CreditWorks.VehicleManagement.Vehicles.Models;
 using System.Collections.Immutable;
 
 namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing

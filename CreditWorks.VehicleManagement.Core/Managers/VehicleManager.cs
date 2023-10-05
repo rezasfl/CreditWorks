@@ -60,6 +60,19 @@ namespace CreditWorks.VehicleManagement.Core.Managers
             return new Tuple<IEnumerable<Category>, IEnumerable<Manufacturer>, IEnumerable<Vehicle>>(categories, manufacturers, vehicles);
         }
 
+        public async Task<Vehicle?> GetVehicle(int id)
+        {
+            using var context = await _dbContextFactory.CreateDbContextAsync();
+
+            //had to call these to be able to get manufacturer and category Ids
+            await context.Categories.ToListAsync();
+            await context.Manufacturers.ToListAsync();
+
+            var vehicles = await context.Vehicles.ToListAsync();
+
+            return vehicles.SingleOrDefault(v => v.Id == id);
+        }
+
         public async Task<IEnumerable<Category>> UpsertCategories(IEnumerable<Category> categories)
         {
             using var context = await _dbContextFactory.CreateDbContextAsync();

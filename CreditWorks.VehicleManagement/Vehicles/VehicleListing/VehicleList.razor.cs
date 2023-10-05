@@ -98,6 +98,11 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing
             }
         }
 
+        private void OnCreateClicked()
+        {
+            NavigationManager?.NavigateTo($"/vehicles/NEW");
+        }
+
         private void ClearFilters()
         {
             Facade?.List();

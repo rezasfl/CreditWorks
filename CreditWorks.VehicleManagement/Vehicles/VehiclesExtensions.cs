@@ -1,4 +1,5 @@
-﻿using CreditWorks.VehicleManagement.Vehicles.VehicleListing;
+﻿using CreditWorks.VehicleManagement.Vehicles.VehicleEditing;
+using CreditWorks.VehicleManagement.Vehicles.VehicleListing;
 
 namespace CreditWorks.VehicleManagement.Vehicles
 {
@@ -6,7 +7,7 @@ namespace CreditWorks.VehicleManagement.Vehicles
     {
         public static IServiceCollection AddVehicles(this IServiceCollection services)
         {
-            //services.AddScoped<VehicleFacade>();
+            services.AddScoped<VehicleFacade>();
             services.AddScoped<VehicleListFacade>();
 
             return services;

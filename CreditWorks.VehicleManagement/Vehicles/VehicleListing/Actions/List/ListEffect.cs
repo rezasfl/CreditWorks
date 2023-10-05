@@ -1,5 +1,5 @@
 ﻿using CreditWorks.VehicleManagement.Core.Managers;
-using CreditWorks.VehicleManagement.Data.Models;
+using CreditWorks.VehicleManagement.Vehicles.Models;
 using Fluxor;
 using System.Collections.Immutable;
 
@@ -39,24 +39,24 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing.Actions.List
             }
         }
 
-        private static ImmutableList<Shared.Models.Category> GenerateCategories(IEnumerable<Category> categories)
+        private static ImmutableList<Category> GenerateCategories(IEnumerable<Data.Models.Category> categories)
         {
             return categories
-                .Select(c => new Shared.Models.Category(c.Id, c.Name, c.MinWeight, c.MaxWeight, c.IconUrl))
+                .Select(c => new Category(c.Id, c.Name!, c.IconUrl))
                 .ToImmutableList();
         }
 
-        private static ImmutableList<Models.Manufacturer> GenerateManufacturers(IEnumerable<Manufacturer> manufacturers)
+        private static ImmutableList<Manufacturer> GenerateManufacturers(IEnumerable<Data.Models.Manufacturer> manufacturers)
         {
             return manufacturers
-                .Select(c => new Models.Manufacturer(c.Id, c.Name))
+                .Select(c => new Manufacturer(c.Id, c.Name))
                 .ToImmutableList();
         }
 
-        private static ImmutableList<Models.VehicleListItem> GenerateVehicles(IEnumerable<Vehicle> vehicles)
+        private static ImmutableList<VehicleListItem> GenerateVehicles(IEnumerable<Data.Models.Vehicle> vehicles)
         {
             return vehicles
-                .Select(c => new Models.VehicleListItem(c.Id, c.Manufacturer.Id, c.Category.Id, c.Owner, c.Year))
+                .Select(c => new VehicleListItem(Convert.ToInt32(c.Id), c.Manufacturer.Id, c.Category.Id, c.Owner, c.Year))
                 .ToImmutableList();
         }
     }

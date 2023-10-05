@@ -1,0 +1,56 @@
+﻿@page "/vehicles/{id}"
+
+@using Fluxor.Blazor.Web.Components;
+
+@inherits FluxorComponent
+
+@if (State != null && VehicleListState != null)
+{
+    @if (State.Value.UnderEdit != null)
+    {
+        <div class="container">
+            <div class="border-bottom pb-4 mb-4 d-flex align-items-center justify-content-between">
+                <div>
+                    <p class="fw-bold h3 m-0">Vehicles</p>
+                    <div aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/vehicles">Vehicles</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"> @GenerateCurrentBreadcrumbTitle()</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <p class="fw-bold h6 m-0">General</p>
+                </div>
+                <div class="card-body pt-0">
+                    <div class="row">
+                        <div class="col-12 col-md-6 mt-3">
+                            <p>Owner's name</p>
+                            <input type="text" autocomplete="off" @bind="Owner" @bind:event="oninput" class="form-control" placeholder="Enter name" />
+                        </div>
+                        <div class="col-12 col-md-6 mt-3">
+                            <p>Manufacturer</p>
+                            <select @bind="Manufacturer" class="form-select form-select-sm">
+                                <option value="" selected disabled hidden>Select an icon</option>
+                                @foreach (var manufacturer in VehicleListState.Value.Manufacturers)
+                                {
+                                    <option value="@manufacturer.Id"> @manufacturer.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-6 mt-3">
+                            <p>Year</p>
+                            <input type="number" min="1800" max="@DateTime.Now.Year" autocomplete="off" @bind="Year" @bind:event="oninput" class="form-control form-control-sm" placeholder="Year" />
+                        </div>
+                        <div class="col-12 col-md-6 mt-3">
+                            <p>Weight (kg)</p>
+                            <input type="number" max="@DateTime.Now.Year" autocomplete="off" min="1" @bind="Weight" @bind:event="oninput" class="form-control form-control-sm" placeholder="Weight" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
