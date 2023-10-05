@@ -19,7 +19,7 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
         {
             if (State?.Value.UnderEdit != null && Category != null)
             {
-                _validation = State.Value.CategoriesListValidation.CategoryValidations.First(v => v.Category == Category);
+                _validation = State.Value.CategoriesListValidation.CategoryValidations.First(v => v.Category.Id == Category.Id);
 
                 _name = Category.Name;
                 _minWeight = Category.MinWeight;
