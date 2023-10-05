@@ -1,6 +1,4 @@
-﻿using CreditWorks.VehicleManagement.Vehicles.Models;
-
-namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
+﻿namespace CreditWorks.VehicleManagement.Vehicles.Models
 {
     public class VehicleValidation
     {

@@ -2,7 +2,7 @@
 using CreditWorks.VehicleManagement.Vehicles.VehicleListing.Actions.List;
 using Fluxor;
 
-namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing
+namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing.Flux
 {
     public static class VehicleListReducer
     {

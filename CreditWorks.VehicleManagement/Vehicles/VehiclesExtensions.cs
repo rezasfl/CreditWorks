@@ -1,5 +1,5 @@
-﻿using CreditWorks.VehicleManagement.Vehicles.VehicleEditing;
-using CreditWorks.VehicleManagement.Vehicles.VehicleListing;
+﻿using CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Flux;
+using CreditWorks.VehicleManagement.Vehicles.VehicleListing.Flux;
 
 namespace CreditWorks.VehicleManagement.Vehicles
 {

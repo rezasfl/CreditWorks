@@ -1,6 +1,6 @@
 ﻿using Fluxor;
 
-namespace CreditWorks.VehicleManagement.Categories.CategoryEditing
+namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Flux
 {
     public class CategoriesFeature : Feature<CategoriesState>
     {

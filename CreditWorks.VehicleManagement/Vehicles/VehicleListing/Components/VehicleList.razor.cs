@@ -2,11 +2,12 @@ using Blazored.Modal;
 using Blazored.Modal.Services;
 using CreditWorks.VehicleManagement.SharedComponents;
 using CreditWorks.VehicleManagement.Vehicles.Models;
+using CreditWorks.VehicleManagement.Vehicles.VehicleListing.Flux;
 using Fluxor;
 using Fluxor.Blazor.Web.Components;
 using Microsoft.AspNetCore.Components;
 
-namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing
+namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing.Components
 {
     public partial class VehicleList : FluxorComponent
     {

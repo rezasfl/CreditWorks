@@ -1,9 +1,10 @@
 ﻿using CreditWorks.VehicleManagement.Core.Managers;
 using CreditWorks.VehicleManagement.Vehicles.Models;
 using CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Actions.Update;
-using CreditWorks.VehicleManagement.Vehicles.VehicleListing;
+using CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Flux;
 using CreditWorks.VehicleManagement.Vehicles.VehicleListing.Actions;
 using CreditWorks.VehicleManagement.Vehicles.VehicleListing.Actions.List;
+using CreditWorks.VehicleManagement.Vehicles.VehicleListing.Flux;
 using Fluxor;
 using System.Collections.Immutable;
 

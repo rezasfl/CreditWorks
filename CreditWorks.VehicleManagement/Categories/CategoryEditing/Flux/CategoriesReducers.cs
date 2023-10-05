@@ -4,7 +4,7 @@ using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions.List;
 using CreditWorks.VehicleManagement.Categories.CategoryEditing.Actions.Update;
 using Fluxor;
 
-namespace CreditWorks.VehicleManagement.Categories.CategoryEditing
+namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Flux
 {
     public static class CategoriesReducers
     {

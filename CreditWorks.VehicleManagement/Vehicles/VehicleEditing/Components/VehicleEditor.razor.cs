@@ -1,9 +1,10 @@
-﻿using CreditWorks.VehicleManagement.Vehicles.VehicleListing;
+﻿using CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Flux;
+using CreditWorks.VehicleManagement.Vehicles.VehicleListing.Flux;
 using Fluxor;
 using Fluxor.Blazor.Web.Components;
 using Microsoft.AspNetCore.Components;
 
-namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
+namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Components
 {
     public partial class VehicleEditor : FluxorComponent
     {

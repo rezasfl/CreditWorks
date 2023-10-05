@@ -1,7 +1,6 @@
-﻿using CreditWorks.VehicleManagement.Categories.CategoryEditing.Models;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 
-namespace CreditWorks.VehicleManagement.Categories.CategoryEditing
+namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Models
 {
     public class CategoriesListValidation
     {

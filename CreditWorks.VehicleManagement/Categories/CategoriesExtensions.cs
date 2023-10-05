@@ -1,4 +1,4 @@
-﻿using CreditWorks.VehicleManagement.Categories.CategoryEditing;
+﻿using CreditWorks.VehicleManagement.Categories.CategoryEditing.Flux;
 
 namespace CreditWorks.VehicleManagement.Categories
 {

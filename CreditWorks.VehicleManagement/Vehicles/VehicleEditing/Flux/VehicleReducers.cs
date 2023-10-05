@@ -4,7 +4,7 @@ using CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Actions.Load;
 using CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Actions.Update;
 using Fluxor;
 
-namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
+namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Flux
 {
     public static class VehicleReducers
     {
@@ -27,7 +27,7 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
         [ReducerMethod]
         public static VehicleState Reduce(VehicleState _, CreateSuccessAction action) =>
             new(false, null, action.Vehicle);
-        
+
         [ReducerMethod]
         public static VehicleState Reduce(VehicleState state, SaveAction __) =>
             new(true, state.Original, state.UnderEdit);

@@ -1,7 +1,7 @@
 ﻿using CreditWorks.VehicleManagement.Vehicles.Models;
 using System.Collections.Immutable;
 
-namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing
+namespace CreditWorks.VehicleManagement.Vehicles.VehicleListing.Flux
 {
     public class VehicleListState
     {

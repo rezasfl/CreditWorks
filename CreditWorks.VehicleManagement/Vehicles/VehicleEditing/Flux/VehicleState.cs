@@ -1,6 +1,6 @@
 ﻿using CreditWorks.VehicleManagement.Vehicles.Models;
 
-namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
+namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Flux
 {
     public class VehicleState
     {

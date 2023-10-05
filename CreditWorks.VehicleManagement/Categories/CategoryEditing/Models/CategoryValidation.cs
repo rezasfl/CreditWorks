@@ -1,6 +1,4 @@
-﻿using CreditWorks.VehicleManagement.Categories.CategoryEditing.Models;
-
-namespace CreditWorks.VehicleManagement.Categories.CategoryEditing
+﻿namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Models
 {
     public class CategoryValidation
     {

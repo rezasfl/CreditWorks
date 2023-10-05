@@ -1,6 +1,6 @@
 ﻿using Fluxor;
 
-namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
+namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Flux
 {
     public class VehicleFeature : Feature<VehicleState>
     {

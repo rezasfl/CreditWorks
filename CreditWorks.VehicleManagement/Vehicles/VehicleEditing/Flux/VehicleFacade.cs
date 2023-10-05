@@ -4,7 +4,7 @@ using CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Actions.Load;
 using CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Actions.Update;
 using Fluxor;
 
-namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
+namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Flux
 {
     public class VehicleFacade
     {
@@ -77,7 +77,7 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
             }
             else
             {
-                var errorMessage = $"Error setting vehicle's manufacturer, reason: No vehicle under edit"; 
+                var errorMessage = $"Error setting vehicle's manufacturer, reason: No vehicle under edit";
                 _logger.LogError("{Message}", errorMessage);
                 _dispatcher.Dispatch(new VehicleFailureAction(errorMessage));
             }
