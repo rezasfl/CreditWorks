@@ -118,5 +118,40 @@ namespace CreditWorks.VehicleManagement.Core.Managers
 
             return await context.Categories.ToListAsync();
         }
+
+        public async Task UpdateVehicle(Vehicle vehicle)
+        {
+            using var context = await _dbContextFactory.CreateDbContextAsync();
+            var dbVehicle = await context.Vehicles.SingleOrDefaultAsync(c => c.Id == vehicle.Id);
+
+            if (dbVehicle.Owner != vehicle.Owner)
+                dbVehicle.Owner = vehicle.Owner;
+
+            if (dbVehicle.ManufacturerId != vehicle.ManufacturerId)
+                dbVehicle.ManufacturerId = vehicle.ManufacturerId;
+
+            if (dbVehicle.CategoryId != vehicle.CategoryId)
+                dbVehicle.CategoryId = vehicle.CategoryId;
+
+            if (dbVehicle.Year != vehicle.Year)
+                dbVehicle.Year = vehicle.Year;
+
+            if (dbVehicle.Weight != vehicle.Weight)
+                dbVehicle.Weight = vehicle.Weight;
+
+            context.Vehicles.Update(dbVehicle);
+
+            await context.SaveChangesAsync();
+
+        }
+
+        public async Task CreateVehicle(Vehicle vehicle)
+        {
+            using var context = await _dbContextFactory.CreateDbContextAsync();
+
+            await context.Vehicles.AddAsync(vehicle);
+
+            await context.SaveChangesAsync();
+        }
     }
 }
