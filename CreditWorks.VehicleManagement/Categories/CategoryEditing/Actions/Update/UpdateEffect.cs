@@ -32,9 +32,9 @@ namespace CreditWorks.Categories.CategoryEditing.VehicleListing.Actions.Update
 
                     //We add and update in one method because incase somewthing goes wrong, we want to 
                     //rollback the entire transaction to ensure consistency
-                    var result = await _manager.UpsertCategories(categories);
+                    await _manager.UpsertCategories(categories);
 
-                    dispatcher.Dispatch(new ListSuccessAction(GenerateCategoryList(result)));
+                    dispatcher.Dispatch(new ListAction());
                 }
             }
             catch (Exception ex)

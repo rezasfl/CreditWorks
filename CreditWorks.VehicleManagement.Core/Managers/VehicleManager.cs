@@ -73,7 +73,7 @@ namespace CreditWorks.VehicleManagement.Core.Managers
             return vehicles.SingleOrDefault(v => v.Id == id);
         }
 
-        public async Task<IEnumerable<Category>> UpsertCategories(IEnumerable<Category> categories)
+        public async Task UpsertCategories(IEnumerable<Category> categories)
         {
             using var context = await _dbContextFactory.CreateDbContextAsync();
 
@@ -101,8 +101,6 @@ namespace CreditWorks.VehicleManagement.Core.Managers
             }
 
             await context.SaveChangesAsync();
-
-            return await context.Categories.ToListAsync();
         }
 
         public async Task<IEnumerable<Category>> DeleteCategory(int id)
