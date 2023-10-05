@@ -52,8 +52,8 @@
                 </div>
             </div>
 
-            <div class="m-3">
-                <button @onclick="SaveCategory" disabled="@(!State.Value.CanSave)" class="btn btn-sm btn-outline-success">Save</button>
+            <div class="my-3">
+                <button @onclick="SaveCategory" disabled="@(!State.Value.CanSave)" class="@GenerateBtnClass()">Save</button>
             </div>
         </div>
     }

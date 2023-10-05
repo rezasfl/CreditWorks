@@ -111,6 +111,14 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
             Facade?.SaveVehicle();
         }
 
+        private string GenerateBtnClass()
+        {
+            if (!State?.Value.CanSave ?? false)
+                return "btn btn-sm btn-outline-success";
+
+            return "btn btn-sm btn-success";
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
