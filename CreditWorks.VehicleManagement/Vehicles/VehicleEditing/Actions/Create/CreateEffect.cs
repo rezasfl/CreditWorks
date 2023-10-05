@@ -21,8 +21,9 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Actions.Create
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error creating vehicle, reason: {ex.Message}");
-                dispatcher.Dispatch(new VehicleFailureAction());
+                var errorMessage = $"Error creating vehicle, reason: {ex.Message}";
+                _logger.LogError("{Message}", errorMessage);
+                dispatcher.Dispatch(new VehicleFailureAction(ex.Message));
             }
 
             return Task.CompletedTask;

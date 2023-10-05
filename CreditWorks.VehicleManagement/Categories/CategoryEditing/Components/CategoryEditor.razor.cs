@@ -31,14 +31,14 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
                 //setting _minWeightMax to the maximum weight of the lighter category + 1
                 if (lighterCategory != null)
                 {
-                    _minWeightMax = Math.Max(lighterCategory!.MaxWeight!.Value, (_minWeight.HasValue ? _minWeight.Value : 0) + 1);
+                    _minWeightMax = Math.Max(lighterCategory!.MaxWeight!.Value, (_minWeight ?? 0) + 1);
                 }
 
                 //setting _maxWeightMax to the minimum weight of the heavier category - 1
                 if (heavierCategory != null)
                 {
                     if (lighterCategory != null)
-                        _maxWeightMax = Math.Max(lighterCategory!.MinWeight!.Value, _maxWeight.HasValue ? _maxWeight.Value : 0);
+                        _maxWeightMax = Math.Max(lighterCategory!.MinWeight!.Value, _maxWeight ?? 0);
 
                     if (_maxWeightMax > 0)
                         _maxWeightMax--;
@@ -58,7 +58,7 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
             set
             {
                 if (_name != value)
-                    Facade?.SetCategoryName(Category, value);
+                    Facade?.SetCategoryName(Category!, value);
             }
         }
 
@@ -69,7 +69,7 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
             set
             {
                 if (_minWeight != value)
-                    Facade?.SetCategoryMinWeight(Category, value);
+                    Facade?.SetCategoryMinWeight(Category!, value);
             }
         }
 
@@ -80,7 +80,7 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
             set
             {
                 if (_maxWeight != value)
-                    Facade?.SetCategoryMaxWeight(Category, value);
+                    Facade?.SetCategoryMaxWeight(Category!, value);
             }
         }
 

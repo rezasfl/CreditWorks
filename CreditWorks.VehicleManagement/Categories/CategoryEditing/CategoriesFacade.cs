@@ -56,13 +56,13 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing
             }
             else
             {
-                var errorMessage = $"No category under edit";
-                _logger.LogError($"Error setting category icon, reason: {errorMessage}");
+                var errorMessage = $"Error adding cateogory, reason: No category under edit";
+                _logger.LogError("{Message}", errorMessage);
                 _dispatcher.Dispatch(new CategoriesFailureAction(errorMessage));
             }
         }
 
-        internal void SetCategoryMaxWeight(Category? category, float? maxWeight)
+        internal void SetCategoryMaxWeight(Category category, float? maxWeight)
         {
             if (_state.Value.UnderEdit != null)
             {
@@ -74,13 +74,13 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing
             }
             else
             {
-                var errorMessage = $"No category under edit";
-                _logger.LogError($"Error setting category max weight, reason: {errorMessage}");
+                var errorMessage = $"Error setting category max weight, reason: No category under edit";
+                _logger.LogError("{Message}", errorMessage);
                 _dispatcher.Dispatch(new CategoriesFailureAction(errorMessage));
             }
         }
 
-        internal void SetCategoryMinWeight(Category? category, float? minWeight)
+        internal void SetCategoryMinWeight(Category category, float? minWeight)
         {
             if (_state.Value.UnderEdit != null)
             {
@@ -92,13 +92,13 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing
             }
             else
             {
-                var errorMessage = $"No category under edit";
-                _logger.LogError($"Error setting category minimum weight, reason: {errorMessage}");
+                var errorMessage = $"Error setting category minimum weight, reason: No category under edit";
+                _logger.LogError("{Message}", errorMessage);
                 _dispatcher.Dispatch(new CategoriesFailureAction(errorMessage));
             }
         }
 
-        internal void SetCategoryName(Category? category, string? name)
+        internal void SetCategoryName(Category category, string? name)
         {
             if (_state.Value.UnderEdit != null)
             {
@@ -110,8 +110,8 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing
             }
             else
             {
-                var errorMessage = $"No category under edit";
-                _logger.LogError($"Error setting category name, reason: {errorMessage}");
+                var errorMessage = $"Error setting category name, reason: No category under edit";
+                _logger.LogError("{Message}", errorMessage);
                 _dispatcher.Dispatch(new CategoriesFailureAction(errorMessage));
             }
         }
@@ -128,8 +128,8 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing
             }
             else
             {
-                var errorMessage = $"No category under edit";
-                _logger.LogError($"Error setting category icon, reason: {errorMessage}");
+                var errorMessage = $"Error setting category icon, reason: No category under edit";
+                _logger.LogError("{Message}", errorMessage);
                 _dispatcher.Dispatch(new CategoriesFailureAction(errorMessage));
             }
         }

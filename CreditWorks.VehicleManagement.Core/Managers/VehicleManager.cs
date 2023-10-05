@@ -6,7 +6,7 @@ namespace CreditWorks.VehicleManagement.Core.Managers
 {
     public class VehicleManager
     {
-        private IDbContextFactory<VehiclesDbContext> _dbContextFactory;
+        private readonly IDbContextFactory<VehiclesDbContext> _dbContextFactory;
 
         public VehicleManager(IDbContextFactory<VehiclesDbContext> dbContextFactory)
         {
@@ -122,25 +122,27 @@ namespace CreditWorks.VehicleManagement.Core.Managers
             using var context = await _dbContextFactory.CreateDbContextAsync();
             var dbVehicle = await context.Vehicles.SingleOrDefaultAsync(c => c.Id == vehicle.Id);
 
-            if (dbVehicle.Owner != vehicle.Owner)
-                dbVehicle.Owner = vehicle.Owner;
+            if (dbVehicle != null)
+            {
+                if (dbVehicle.Owner != vehicle.Owner)
+                    dbVehicle.Owner = vehicle.Owner;
 
-            if (dbVehicle.ManufacturerId != vehicle.ManufacturerId)
-                dbVehicle.ManufacturerId = vehicle.ManufacturerId;
+                if (dbVehicle.ManufacturerId != vehicle.ManufacturerId)
+                    dbVehicle.ManufacturerId = vehicle.ManufacturerId;
 
-            if (dbVehicle.CategoryId != vehicle.CategoryId)
-                dbVehicle.CategoryId = vehicle.CategoryId;
+                if (dbVehicle.CategoryId != vehicle.CategoryId)
+                    dbVehicle.CategoryId = vehicle.CategoryId;
 
-            if (dbVehicle.Year != vehicle.Year)
-                dbVehicle.Year = vehicle.Year;
+                if (dbVehicle.Year != vehicle.Year)
+                    dbVehicle.Year = vehicle.Year;
 
-            if (dbVehicle.Weight != vehicle.Weight)
-                dbVehicle.Weight = vehicle.Weight;
+                if (dbVehicle.Weight != vehicle.Weight)
+                    dbVehicle.Weight = vehicle.Weight;
 
-            context.Vehicles.Update(dbVehicle);
+                context.Vehicles.Update(dbVehicle);
 
-            await context.SaveChangesAsync();
-
+                await context.SaveChangesAsync();
+            }
         }
 
         public async Task CreateVehicle(Vehicle vehicle)

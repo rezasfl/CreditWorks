@@ -21,7 +21,7 @@
             </p>
             <select class="form-select form-select-sm ms-1" @bind="SelectedManufacturer">
                 <option value="" selected disabled hidden>All</option>
-                @foreach (var manufacturer in State.Value.Manufacturers)
+                @foreach (var manufacturer in State!.Value.Manufacturers)
                 {
                     <option value="@manufacturer.Id">@manufacturer.Name</option>
                 }

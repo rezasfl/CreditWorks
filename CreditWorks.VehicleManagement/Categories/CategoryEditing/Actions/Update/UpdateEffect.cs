@@ -39,7 +39,8 @@ namespace CreditWorks.Categories.CategoryEditing.VehicleListing.Actions.Update
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error updating category, reason: {ex.Message}");
+                var errorMessage = $"Error updating categories, reason: {ex.Message}";
+                _logger.LogError("{Message}", errorMessage);
                 dispatcher.Dispatch(new CategoriesFailureAction(ex.Message));
 
                 //TODO: UI flux effect for showing error in UI
@@ -68,15 +69,6 @@ namespace CreditWorks.Categories.CategoryEditing.VehicleListing.Actions.Update
             }
 
             return newCategories;
-        }
-
-        private static CategoriesList GenerateCategoryList(IEnumerable<VehicleManagement.Data.Models.Category> categories)
-        {
-            var convertedCategories = categories
-                .Select(c => new Category(c.Id, c.Name, c.MinWeight, c.MaxWeight, c.IconUrl))
-                .ToImmutableList();
-
-            return new CategoriesList(convertedCategories);
         }
     }
 }

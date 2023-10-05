@@ -52,8 +52,9 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Actions.Load
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error loading vehicle, reason: {ex.Message}");
-                dispatcher.Dispatch(new VehicleFailureAction());
+                var errorMessage = $"Error loading vehicle, reason: {ex.Message}";
+                _logger.LogError("{Message}", errorMessage);
+                dispatcher.Dispatch(new VehicleFailureAction(ex.Message));
             }
         }
     }

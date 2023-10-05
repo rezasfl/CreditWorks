@@ -35,14 +35,17 @@
                     <div class="row g-0">
                         <div class="border-0 border-end col-12 col-md-3 col-sm-4 d-flex flex-column justify-content-between p-0">
                             <div>
-                                <select @bind="SelectedCategoryId" class="bg-white border-0 form-control h-100 overflow-auto p-1 ps-1 w-100" size="@(Math.Max(2, (State.Value.UnderEdit?.Categories.Count) ?? 0))">
+                                <select @bind="SelectedCategoryId" class="bg-white border-0 form-control h-100 overflow-auto p-1 ps-1 w-100" size="@(Math.Max(2, (State?.Value.UnderEdit?.Categories.Count) ?? 0))">
                                     @{
-                                        var categories = State.Value.UnderEdit.Categories;
+                                        var categories = State?.Value.UnderEdit.Categories;
 
-                                        foreach (var category in categories)
+                                        @if (categories?.Any() ?? false)
                                         {
-                                            var validation = _validation?.Errors.FirstOrDefault(v => v.category == category);
-                                            <option class="p-2 rounded-start text-truncate @GenerateBgColor(validation?.error)" title="@validation?.error" value="@category.Id">@GenerateName(category)</option>
+                                            foreach (var category in categories)
+                                            {
+                                                var validation = _validation?.Errors.FirstOrDefault(v => v.category == category);
+                                                <option class="p-2 rounded-start text-truncate @GenerateBgColor(validation?.error)" title="@validation?.error" value="@category.Id">@GenerateName(category)</option>
+                                            }
                                         }
                                     }
                                 </select>
@@ -56,8 +59,8 @@
                         </div>
                     </div>
                     <div class="m-3">
-                        <button class="btn btn-sm btn-success me-4 @(State.Value.CanSave ? "" : "disabled")" @onclick="SaveCategories" disabled="@(!State.Value.CanSave)">Save</button>
-                        <button @onclick="Facade.CancelChanges" disabled="@(!State.Value.HasEdits)" class="btn btn-sm btn-secondary"> @GenerateCancelButtonText() </button>
+                        <button class="btn btn-sm btn-success me-4 @(State!.Value.CanSave ? "" : "disabled")" @onclick="SaveCategories" disabled="@(!State.Value.CanSave)">Save</button>
+                        <button @onclick="CancelChanges" disabled="@(!State.Value.HasEdits)" class="btn btn-sm btn-secondary"> @GenerateCancelButtonText() </button>
                     </div>
                 }
             </div>

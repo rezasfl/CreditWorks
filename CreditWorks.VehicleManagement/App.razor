@@ -1,6 +1,15 @@
 ﻿
 <Fluxor.Blazor.Web.StoreInitializer />
 <CascadingBlazoredModal DisableBackgroundCancel="true" HideCloseButton="true" AnimationType="ModalAnimationType.FadeInOut">
+
+    <BlazoredToasts Position="ToastPosition.TopCenter" Timeout="10" ShowProgressBar="true" RemoveToastsOnNavigation="true" MaxToastCount="3" PauseProgressOnHover="true">
+        <CloseButtonContent>
+            <div>
+                <span>&times;</span>
+            </div>
+        </CloseButtonContent>
+    </BlazoredToasts>
+
     <Router AppAssembly="@typeof(App).Assembly">
         <Found Context="routeData">
             <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />

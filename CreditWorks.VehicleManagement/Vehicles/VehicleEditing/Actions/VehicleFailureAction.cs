@@ -2,5 +2,11 @@
 {
     public class VehicleFailureAction
     {
+        public VehicleFailureAction(string errorMessage)
+        {
+            ErrorMessage = errorMessage;
+        }
+
+        public string ErrorMessage { get; }
     }
 }

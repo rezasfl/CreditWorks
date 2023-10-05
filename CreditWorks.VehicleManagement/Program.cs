@@ -6,6 +6,7 @@ using Fluxor;
 using Microsoft.EntityFrameworkCore;
 using MatBlazor;
 using Blazored.Modal;
+using Blazored.Toast;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +19,7 @@ builder.Services.AddVehicles();
 builder.Services.AddCategories();
 
 builder.Services.AddBlazoredModal();
-//builder.Services.AddBlazoredToast();
+builder.Services.AddBlazoredToast();
 
 builder.Services.AddFluxor(o =>
 {

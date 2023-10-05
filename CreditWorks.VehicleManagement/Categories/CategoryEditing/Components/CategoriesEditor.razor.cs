@@ -80,7 +80,7 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
             }
         }
 
-        private string GenerateName(Category category)
+        private static string GenerateName(Category category)
         {
             if (string.IsNullOrWhiteSpace(category.Name))
                 return "NOT SET";
@@ -88,7 +88,7 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
             return category.Name;
         }
 
-        private string GenerateBgColor(string? error)
+        private static string GenerateBgColor(string? error)
         {
             if (!string.IsNullOrWhiteSpace(error))
                 return "bg-danger-25";
@@ -121,6 +121,11 @@ namespace CreditWorks.VehicleManagement.Categories.CategoryEditing.Components
                 text = "Cancel";
 
             return text;
+        }
+
+        private void CancelChanges()
+        {
+            Facade?.CancelChanges();
         }
     }
 }

@@ -50,8 +50,9 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing.Actions.Save
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error updating category, reason: {ex.Message}");
-                dispatcher.Dispatch(new VehicleFailureAction());
+                var errorMessage = $"Error setting category minimum weight, reason: {ex.Message}";
+                _logger.LogError("{Message}", errorMessage);
+                dispatcher.Dispatch(new VehicleFailureAction(ex.Message));
             }
         }
 

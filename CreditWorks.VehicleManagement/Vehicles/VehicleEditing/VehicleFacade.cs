@@ -54,9 +54,9 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
             }
             else
             {
-                var errorMessage = $"No vehicle under edit";
-                _logger.LogError($"Error setting vehicle's owner, reason: {errorMessage}");
-                _dispatcher.Dispatch(new VehicleFailureAction());
+                var errorMessage = $"Error setting vehicle's owner, reason: No vehicle under edit";
+                _logger.LogError("{Message}", errorMessage);
+                _dispatcher.Dispatch(new VehicleFailureAction(errorMessage));
             }
         }
 
@@ -72,9 +72,9 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
             }
             else
             {
-                var errorMessage = $"No vehicle under edit";
-                _logger.LogError($"Error setting vehicle's manufacturer, reason: {errorMessage}");
-                _dispatcher.Dispatch(new VehicleFailureAction());
+                var errorMessage = $"Error setting vehicle's manufacturer, reason: No vehicle under edit"; 
+                _logger.LogError("{Message}", errorMessage);
+                _dispatcher.Dispatch(new VehicleFailureAction(errorMessage));
             }
         }
 
@@ -90,9 +90,9 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
             }
             else
             {
-                var errorMessage = $"No vehicle under edit";
-                _logger.LogError($"Error setting vehicle's year, reason: {errorMessage}");
-                _dispatcher.Dispatch(new VehicleFailureAction());
+                var errorMessage = $"Error setting vehicle's year, reason: No vehicle under edit";
+                _logger.LogError("{Message}", errorMessage);
+                _dispatcher.Dispatch(new VehicleFailureAction(errorMessage));
             }
         }
 
@@ -108,9 +108,9 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
             }
             else
             {
-                var errorMessage = $"No vehicle under edit";
-                _logger.LogError($"Error setting vehicle's weight, reason: {errorMessage}");
-                _dispatcher.Dispatch(new VehicleFailureAction());
+                var errorMessage = "Error setting vehicle's weight, reason: No vehicle under edit";
+                _logger.LogError("{Message}", errorMessage);
+                _dispatcher.Dispatch(new VehicleFailureAction(errorMessage));
             }
         }
     }

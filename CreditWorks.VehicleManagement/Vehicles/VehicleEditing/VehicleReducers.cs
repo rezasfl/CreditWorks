@@ -9,7 +9,7 @@ namespace CreditWorks.VehicleManagement.Vehicles.VehicleEditing
     public static class VehicleReducers
     {
         [ReducerMethod]
-        public static VehicleState Reduce(VehicleState _, LoadAction action) =>
+        public static VehicleState Reduce(VehicleState _, LoadAction __) =>
             new(true, null, null);
 
         [ReducerMethod]
